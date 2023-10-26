@@ -2,14 +2,12 @@
 	"Alaska_08162022_HouseofRepresentativesSpecial": {
 		"condorcet_failure": "x",
 		"upward_monotonicity_failure": "x",
-		"compromise_failure": "x",
-		"sources": []
+		"compromise_failure": "x"
 	},
 	"Moab_11022021_CityCouncil": {
 		"condorcet_failure": "x",
 		"upward_monotonicity_failure": "x",
 		"compromise_failure": "x",
-		"repeal": "x",
-		"sources": []
+		"repeal": "x"
 	}
 }
