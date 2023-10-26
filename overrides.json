@@ -7,5 +7,97 @@
 		"condorcet_failure": "x",
 		"upward_monotonicity_failure": "x",
 		"repeal": "x"
+	},
+	"pierce 2008": {
+		"repeal": "x",
+		"compromise_failure": "x",
+		"note1": "https://arxiv.org/abs/2209.04764"
+	},
+	"burlington 2009": {
+		"upward_monotonicity_failure": "x",
+		"compromise_failure": "x",
+		"repeal": "x",
+		"note1": "https://arxiv.org/abs/2209.04764"
+	},
+	"Aspen_2009_CityCouncil": {
+		"downward_monotonicity_failure": "x",
+		"competitve_ratio": 0.9,
+		"repeal": "x",
+		"note1": "https://rangevoting.org/Aspen09.html",
+		"note2": "https://www.preflib.org/dataset/00016",
+		"note3": "This wasn't in the in FairVote database, since it used a strange set of rules. But the second round where the monotonicity failure happened, was identical to IRV"
+	},
+	"oakland 2010": {
+		"compromise_failure": "x",
+		"note1": "https://arxiv.org/abs/2209.04764"
+	},
+	"berkley 2016": {
+		"compromise_failure": "x",
+		"note1": "https://arxiv.org/abs/2209.04764"
+	},
+	"minneapolis 2017": {
+		"compromise_failure": "x",
+		"note1": "https://arxiv.org/abs/2209.04764"
+	},
+	"san francisco 2020": {
+		"downward_monotonicity_failure": "x",
+		"note1": "https://arxiv.org/abs/2209.04764"
+	},
+	"minneapolis 2021": {
+		"upward_monotonicity_failure": "x",
+		"downward_monotonicity_failure": "x",
+		"condorcet_cycle": "x",
+		"note1": "https://arxiv.org/abs/2209.04764"
+	},
+	"Moab 2021": {
+		"upward_monotonicity_failure": "x",
+		"repeal": "x",
+		"note1": "https://vixra.org/abs/2208.0166",
+		"note2": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Alameda 2022": {
+		"upward_monotonicity_failure": "x",
+		"repeal": "x",
+		"note1": "https://arxiv.org/abs/2303.05985"
+	},
+	"Alaska 2022": {
+		"upward_monotonicity_failure": "x",
+		"note1": "https://arxiv.org/abs/2209.04764"
+	},
+	"Genola_11022021_CityCouncil": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Lehi_11022021_CityCouncil": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Payson_11052019_CityCouncil_tab1": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Payson_11052019_CityCouncil_tab2": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Payson_11052019_CityCouncil_tab3": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Portland_06142022_SchoolboardAL": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Portland_06142022_Schoolboarddistrict5": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Springville_11022021_CityCouncil4yr": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Vineyard_11022021_CityCouncil": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Vineyard_11052019_CityCouncil_tab1": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"Vineyard_11052019_CityCouncil_tab2": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
+	},
+	"WoodlandHills_11022021_CityCouncil": {
+		"note1": "This was a sequential rcv election, but I only simulated the first round"
 	}
 }
