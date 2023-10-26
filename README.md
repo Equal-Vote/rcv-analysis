@@ -16,11 +16,11 @@ Here's information for each of the output files (the date corresponds to the dat
 
 The outputs have also been posted as a [google spreadsheet](https://docs.google.com/spreadsheets/d/1iMa8Gw6-7Nu06JMKAstaMd7U3GwrCSUn3hfHoepCUAw/edit?usp=sharing)
 
-## 10-25-2023
+## 2023-10-25
 
 I collected all the single and sequential irv datafiles and ran single winner irv on all of them.
 
-There were 455 elections in the dataset, however Easthampton_11022021_Mayor, and Payson_Citycouncil 1-3 were bugged, and I added Aspen manually, so the final number was still 452
+There were initially 455 bug several elections were bugged (Easthampton_11022021_Mayor, Payson_Citycouncil 1-3 were bugged, and Vineyard tab 1-2), and I manually added Aspen, so the final number was 448 (there's still 2 unaccounted for, not sure where those went)
 
 It assumed the following settings, individual elections require different settings, but these will hopefully be close enough for a starting point
 
@@ -36,3 +36,5 @@ This dataset also specifes a number of overrides for fields that aren't computed
 # Future work
 
 The FairVote RCV Cruncher tool was very helpful and gave us 99% of the data we needed. The only other bit I'd like to include is number of stalled or untransferred votes. These are the number of 
+
+I'd also like to make the tool a bit easier to use. Right now it runs for an hour+ and it would be great if it could pick up where it left off if it bugged halfway through
