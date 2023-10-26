@@ -1,19 +1,17 @@
 {
 	"Alaska_08162022_HouseofRepresentativesSpecial": {
-		"condorcet_failure": "x",
 		"upward_monotonicity_failure": "x"
 	},
 	"Moab_11022021_CityCouncil": {
-		"condorcet_failure": "x",
 		"upward_monotonicity_failure": "x",
 		"repeal": "x"
 	},
-	"pierce 2008": {
+	"PierceCounty_11042008_CountyExecutiveMember": {
 		"repeal": "x",
 		"compromise_failure": "x",
 		"note1": "https://arxiv.org/abs/2209.04764"
 	},
-	"burlington 2009": {
+	"Burlington_03032009_Mayor": {
 		"upward_monotonicity_failure": "x",
 		"compromise_failure": "x",
 		"repeal": "x",
@@ -21,46 +19,45 @@
 	},
 	"Aspen_2009_CityCouncil": {
 		"downward_monotonicity_failure": "x",
-		"competitve_ratio": 0.9,
+		"competitive_ratio": 0.9,
 		"repeal": "x",
 		"note1": "https://rangevoting.org/Aspen09.html",
 		"note2": "https://www.preflib.org/dataset/00016",
 		"note3": "This wasn't in the in FairVote database, since it used a strange set of rules. But the second round where the monotonicity failure happened, was identical to IRV"
 	},
-	"oakland 2010": {
+	"Oakland_11022010_Mayor": {
 		"compromise_failure": "x",
 		"note1": "https://arxiv.org/abs/2209.04764"
 	},
-	"berkley 2016": {
+	"Berkeley_11082016_CityCouncilDistrict2": {
 		"compromise_failure": "x",
 		"note1": "https://arxiv.org/abs/2209.04764"
 	},
-	"minneapolis 2017": {
+	"Minneapolis_11072017_Ward3CityCouncil": {
 		"compromise_failure": "x",
 		"note1": "https://arxiv.org/abs/2209.04764"
 	},
-	"san francisco 2020": {
+	"SanFrancisco_11032020_BOARDOFSUPERVISORSDISTRICT7": {
 		"downward_monotonicity_failure": "x",
 		"note1": "https://arxiv.org/abs/2209.04764"
 	},
-	"minneapolis 2021": {
+	"Minneapolis_11022021_CityCouncilWard3": {
 		"upward_monotonicity_failure": "x",
 		"downward_monotonicity_failure": "x",
-		"condorcet_cycle": "x",
 		"note1": "https://arxiv.org/abs/2209.04764"
 	},
-	"Moab 2021": {
+	"Moab_11022021_CityCouncil": {
 		"upward_monotonicity_failure": "x",
 		"repeal": "x",
 		"note1": "https://vixra.org/abs/2208.0166",
 		"note2": "This was a sequential rcv election, but I only simulated the first round"
 	},
-	"Alameda 2022": {
+	"Oakland_11082022_Schoolboarddistrict4": {
 		"upward_monotonicity_failure": "x",
 		"repeal": "x",
 		"note1": "https://arxiv.org/abs/2303.05985"
 	},
-	"Alaska 2022": {
+	"Alaska_08162022_HouseofRepresentativesSpecial": {
 		"upward_monotonicity_failure": "x",
 		"note1": "https://arxiv.org/abs/2209.04764"
 	},
