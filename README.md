@@ -1,12 +1,15 @@
-## Setup
+# Overview
+You can find descriptions of most of the stats [here](https://rcv-cruncher.readthedocs.io/en/latest/statistics.html)
+
+# Setup
 
 This project assumes you download cvrs from [here](https://dataverse.harvard.edu/dataverse/rcv_cvrs) and put them in a folder called csv
 
-## Outputs
+# Outputs
 
 Here's information for each of the output files
 
-### 10-25-2023
+## 10-25-2023
 
 This was ran all all the single and sequential irv datafiles, and it assumed the following settings
 

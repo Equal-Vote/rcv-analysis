@@ -1,6 +1,10 @@
+import sys
+import os
+import argparse
+import time
+
 import json
 import csv
-import argparse
 import warnings
 
 from collections import defaultdict
@@ -8,6 +12,12 @@ from rcv_cruncher import rank_column_csv, SingleWinner, CastVoteRecord
 from pathlib import Path
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
+
+def log(msg, end='\n'):
+    #print(msg, end=None)
+    # my terminal wasn't showing realtime updates by default, so I had to add flush
+    sys.stdout.write(f'{msg}{end}')
+    sys.stdout.flush()
 
 
 def get_args():
@@ -60,8 +70,10 @@ def parse_cvrs(file_names):
         'first_round_winner_place': '',
     })
 
-    for file in file_names:
+    for (i, file) in enumerate(file_names):
         election_name = file.split('.')[0]
+        log(f'{i+1}/{len(file_names)} {election_name}....', end='')
+        start = time.time()
 
         # Load election into rcv_cruncher
         base_path = Path.cwd() / 'cvr';
@@ -119,6 +131,8 @@ def parse_cvrs(file_names):
             'first_round_winner_place': stats['first_round_winner_place'],
         })
 
+        log(f'{round(time.time()-start)}s')
+
     return data
 
 
@@ -145,19 +159,19 @@ def generate_csv(file_name, data):
 if __name__ == '__main__':
     args = get_args()
 
-    file_names = [
-        'Moab_11022021_CityCouncil.csv',
-        # 'Vineyard_11022021_CityCouncil.csv',
-        # 'WoodlandHills_11022021_CityCouncil.csv',
-    ]
+    file_names = os.listdir('cvr/')
+
+    start = time.time()
 
     data = parse_cvrs(file_names)
 
     add_overrides(data)
 
+    log(f'Total Time: {round(time.time()-start)}s')
+
     if args.output:
         generate_csv(args.output, data)
     else:
-        print(json.dumps(data, indent=4))
+        log(json.dumps(data, indent=4))
 
 
