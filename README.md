@@ -1,5 +1,5 @@
 # Overview
-This is a script that'll run rcv cruncher and all the electiosn you have in the cvr folder, and summarize the results in a csv file
+This is a script that'll run rcv cruncher on all the elections you have in the cvr folder, and summarize the results in a csv file (assuming you specify an output file, otherwise it'll output a json blob to the console)
 
 You can find descriptions of most of the stats [here](https://rcv-cruncher.readthedocs.io/en/latest/statistics.html)
 
@@ -14,11 +14,11 @@ This project assumes you download cvrs from [here](https://dataverse.harvard.edu
 
 Here's information for each of the output files (the date corresponds to the date the CVRs were imported from dataverse, not the date the simulation was ran)
 
-The outputs can also been posted as a [google spreadsheet](https://docs.google.com/spreadsheets/d/1iMa8Gw6-7Nu06JMKAstaMd7U3GwrCSUn3hfHoepCUAw/edit?usp=sharing)
+The outputs have also been posted as a [google spreadsheet](https://docs.google.com/spreadsheets/d/1iMa8Gw6-7Nu06JMKAstaMd7U3GwrCSUn3hfHoepCUAw/edit?usp=sharing)
 
 ## 10-25-2023
 
-This was ran on all the single and sequential irv datafiles and ran single winner irv on all of them
+I collected all the single and sequential irv datafiles and ran single winner irv on all of them.
 
 There were 455 elections in the dataset, however Easthampton_11022021_Mayor, and Payson_Citycouncil 1-3 were bugged, and I added Aspen manually, so the final number was still 452
 

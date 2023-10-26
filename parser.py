@@ -68,10 +68,11 @@ def log(msg, end='\n'):
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', '--output')
+    parser.add_argument('-v', '--verbose', action='store_true')
     return parser.parse_args()
 
 
-def parse_cvrs(file_names):
+def parse_cvrs(file_names, verbose):
     for (i, file) in enumerate(file_names):
         election_name = file.split('.')[0]
         log(f'{i+1}/{len(file_names)} {election_name}....', end='')
@@ -141,6 +142,8 @@ def parse_cvrs(file_names):
             log(f'{round(time.time()-start)}s')
         except Exception as e:
             log('ERROR')
+            if verbose:
+                log(e)
 
 
 def add_overrides():
@@ -170,17 +173,18 @@ if __name__ == '__main__':
     args = get_args()
 
     file_names = os.listdir('cvr/')
+    # file_names = ['Moab_11022021_CityCouncil.csv']
 
     start = time.time()
 
-    add_overrides() # adding overrides first since their mutually exclusive, and I want to catch errors quick
+    add_overrides() # adding overrides first since the fields are mutually exclusive, and I want to catch errors quick
 
-    parse_cvrs(file_names)
+    parse_cvrs(file_names, args.verbose)
 
     log(f'Total Time: {round(time.time()-start)}s')
 
     if args.output:
-        generate_csv(args.output, data)
+        generate_csv(args.output)
     else:
         log(json.dumps(data, indent=4))
 
