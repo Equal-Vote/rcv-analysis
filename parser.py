@@ -30,6 +30,7 @@ data = defaultdict( lambda: {
     # These are set based on rcv cruncher
     'n_candidates': '',
     'rank_limit': '',
+    'come_from_behind': '',
     'restrictive_rank_limit': '',
     'first_round_overvote': '',
     'ranked_single': '',
@@ -111,6 +112,7 @@ def parse_cvrs(file_names, verbose):
                 'competitive_ratio': competitive_ratio,
 
                 'n_candidates': stats['n_candidates'],
+                'come_from_behind': stats['come_from_behind'],
                 'rank_limit': stats['rank_limit'],
                 'restrictive_rank_limit': stats['restrictive_rank_limit'],
                 'first_round_overvote': stats['first_round_overvote'],
