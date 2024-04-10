@@ -6,7 +6,7 @@ import json
 import csv
 import warnings
 
-from election_stats import parse_election_stats
+from election_stats.election_stats import parse_election_stats
 
 from util import *
 
@@ -58,11 +58,8 @@ if __name__ == '__main__':
 
     log(f'Total Time: {round(time.time()-start)}s')
 
-
     if args.op in ('election-stats', 'precinct-stats', 'parse-census',):
         if args.output:
             generate_csv(args.output)
         else:
             log(json.dumps(data, indent=4))
-
-

@@ -5,7 +5,7 @@ from pathlib import Path
 
 from rcv_cruncher import rank_column_csv, SingleWinner, CastVoteRecord
 
-from util import log
+from util import *
 
 data = defaultdict( lambda: {
     # These are derived values
