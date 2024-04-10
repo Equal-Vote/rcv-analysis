@@ -1,17 +1,11 @@
-import sys
-import os
-import argparse
-import time
-
 import json
-import csv
-import warnings
-
+import time
 from collections import defaultdict
-from rcv_cruncher import rank_column_csv, SingleWinner, CastVoteRecord
 from pathlib import Path
 
-warnings.simplefilter(action='ignore', category=FutureWarning)
+from rcv_cruncher import rank_column_csv, SingleWinner, CastVoteRecord
+
+from util import log
 
 data = defaultdict( lambda: {
     # These are derived values
@@ -30,6 +24,7 @@ data = defaultdict( lambda: {
     # These are set based on rcv cruncher
     'n_candidates': '',
     'rank_limit': '',
+    'come_from_behind': '',
     'restrictive_rank_limit': '',
     'first_round_overvote': '',
     'ranked_single': '',
@@ -57,22 +52,21 @@ data = defaultdict( lambda: {
     'first_round_winner_place': '',
 })
 
+def add_overrides():
+    # add overrides
+    with open('election_stats/overrides.json', 'r') as f:
+        overrides = json.load(f)
+        for election, row in overrides.items():
+            if not set(row.keys()).issubset(set(data[election].keys())):
+                raise Exception(f'{row.keys()} contains invalid entries')
 
-def log(msg, end='\n'):
-    #print(msg, end=None)
-    # my terminal wasn't showing realtime updates by default, so I had to add flush
-    sys.stdout.write(f'{msg}{end}')
-    sys.stdout.flush()
-
-
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-o', '--output')
-    parser.add_argument('-v', '--verbose', action='store_true')
-    return parser.parse_args()
+            row['election'] = election
+            data[election].update(row)
 
 
-def parse_cvrs(file_names, verbose):
+
+def parse_election_stats(file_names, verbose):
+    add_overrides() # adding overrides first since the fields are mutually exclusive, and I want to catch errors quick
     for (i, file) in enumerate(file_names):
         election_name = file.split('.')[0]
         log(f'{i+1}/{len(file_names)} {election_name}....', end='')
@@ -86,12 +80,14 @@ def parse_cvrs(file_names, verbose):
             election = SingleWinner(
                  parser_func=rank_column_csv,
                  parser_args={'cvr_path': cvr_file},
-                 exhaust_on_duplicate_candidate_marks=False,
+                 exhaust_on_duplicate_candidate_marks=True,
                  exhaust_on_overvote_marks=True,
-                 exhaust_on_N_repeated_skipped_marks=0
+                 exhaust_on_N_repeated_skipped_marks=0,
+                 split_fields=['Precinct']
             )
 
-            stats = election.get_stats()[0].to_dict()
+            stats = election.get_stats(add_split_stats=True)[0].to_dict()
+            print(stats)
             stats = {k:v[0] for k,v in stats.items()}
 
             # Compute competitive ratio
@@ -111,6 +107,7 @@ def parse_cvrs(file_names, verbose):
                 'competitive_ratio': competitive_ratio,
 
                 'n_candidates': stats['n_candidates'],
+                'come_from_behind': stats['come_from_behind'],
                 'rank_limit': stats['rank_limit'],
                 'restrictive_rank_limit': stats['restrictive_rank_limit'],
                 'first_round_overvote': stats['first_round_overvote'],
@@ -140,52 +137,11 @@ def parse_cvrs(file_names, verbose):
             })
 
             log(f'{round(time.time()-start)}s')
+
+            return data;
         except Exception as e:
             log('ERROR')
             if verbose:
                 log(e)
-
-
-def add_overrides():
-    # add overrides
-    with open('overrides.json', 'r') as f:
-        overrides = json.load(f)
-        for election, row in overrides.items():
-            if not set(row.keys()).issubset(set(data[election].keys())):
-                raise Exception(f'{row.keys()} contains invalid entries')
-
-            row['election'] = election
-            data[election].update(row)
-
-
-def generate_csv(file_name):
-    with open(file_name, 'w') as f:
-        writer = csv.DictWriter(f,
-            fieldnames=data[list(data.keys())[0]].keys()
-        )
-    
-        writer.writeheader()
-        for key, value in data.items():
-            writer.writerow(value)
-
-
-if __name__ == '__main__':
-    args = get_args()
-
-    file_names = os.listdir('cvr/')
-    # file_names = ['Moab_11022021_CityCouncil.csv']
-
-    start = time.time()
-
-    add_overrides() # adding overrides first since the fields are mutually exclusive, and I want to catch errors quick
-
-    parse_cvrs(file_names, args.verbose)
-
-    log(f'Total Time: {round(time.time()-start)}s')
-
-    if args.output:
-        generate_csv(args.output)
-    else:
-        log(json.dumps(data, indent=4))
 
 
