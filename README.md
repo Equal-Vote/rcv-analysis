@@ -20,8 +20,15 @@ The outputs have also been posted as a [Google spreadsheet](https://docs.google.
 
 I collected all the [single](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/AMK8PJ) and [sequential](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/04LOQX) IRV datafiles and ran single-winner IRV on all of them.
 
-There were 455 elections in the dataset, however `Vineyard tab 1-2`, `Easthampton_11022021_Mayor` and `Payson_11052019_CityCouncil` 1-3 were bugged, and I added Aspen manually, so the final number was still 452
+There were 455 elections in the dataset, however several files were bugged, and I added Aspen manually. My final spreadsheet had 448 entries (so it seems like there's 2 other elections that I'm missing, not sure where those went)
 
+Bugged Files
+* Vineyard_11052019_CityCouncil_tab1.csv
+* Vineyard_11052019_CityCouncil_tab2.csv
+* Easthampton_11022021_Mayor.csv
+* Payson_11052019_CityCouncil_tab1.csv
+* Payson_11052019_CityCouncil_tab2.csv
+* Payson_11052019_CityCouncil_tab3.csv
 
 It assumed the following settings. Individual elections require different settings, but these will hopefully be close enough for a starting point:
 
