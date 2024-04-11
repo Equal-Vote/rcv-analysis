@@ -42,6 +42,8 @@ This dataset also specifes a number of overrides for fields that aren't computed
 
 # Future work
 
-The FairVote RCV Cruncher tool was very helpful and gave us 99% of the data we needed. The only other bit I'd like to include is number of stalled or untransferred votes. These are the number of 
+The FairVote RCV Cruncher tool was very helpful and gave us 99% of the data we needed.
+
+The only other bit I'd like to include is an investigation of skipped and stalled ranks. These are situations where ranks are either skipped because the candidate was already eliminated, or stalled because the ballot had already been allocated toward one of the finalists. It would be super interesting to know what percent of ranks are counted, skipped, or stalled overall, and also know the average number of these ranks per ballot.
 
 I'd also like to make the tool a bit easier to use. Right now it runs for an hour+ and it would be great if it could pick up where it left off if it bugged halfway through
