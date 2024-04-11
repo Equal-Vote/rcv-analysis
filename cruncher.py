@@ -6,8 +6,8 @@ import json
 import csv
 import warnings
 
-from election_stats.election_stats import parse_election_stats
-from precinct_stats.precinct_stats import parse_precinct_stats
+from ops.election_stats.election_stats import parse_election_stats
+from ops.precinct_stats.precinct_stats import parse_precinct_stats
 
 from util import *
 
@@ -30,7 +30,8 @@ def get_args():
 def generate_csv(file_name):
     with open(file_name, 'w') as f:
         writer = csv.DictWriter(f,
-            fieldnames=data[list(data.keys())[0]].keys()
+            fieldnames=data[list(data.keys())[0]].keys(),
+            lineterminator='\n',
         )
     
         writer.writeheader()
@@ -50,11 +51,11 @@ if __name__ == '__main__':
         data = parse_election_stats(cvr_files, args.verbose)
 
     if args.op == 'precinct-stats':
-        data = parse_election_stats(cvr_files, args.verbose)
+        data = parse_precinct_stats(cvr_files, args.verbose)
+
+    if args.op == 'block-to-precinct':
 
     if args.op == 'style-kml':
-        pass
-    if args.op == 'parse-census':
         pass
 
     log(f'Total Time: {round(time.time()-start)}s')

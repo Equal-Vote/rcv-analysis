@@ -54,7 +54,7 @@ data = defaultdict( lambda: {
 
 def add_overrides():
     # add overrides
-    with open('election_stats/overrides.json', 'r') as f:
+    with open('ops/election_stats/overrides.json', 'r') as f:
         overrides = json.load(f)
         for election, row in overrides.items():
             if not set(row.keys()).issubset(set(data[election].keys())):
@@ -136,10 +136,11 @@ def parse_election_stats(file_names, verbose):
 
             log(f'{round(time.time()-start)}s')
 
-            return data;
         except Exception as e:
             log('ERROR')
             if verbose:
                 log(e)
+
+    return data;
 
 
