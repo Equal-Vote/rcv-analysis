@@ -14,7 +14,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'append-kml', 'parse-census'])
+    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'style-kml', 'parse-census'])
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
     # kml specific args
@@ -43,7 +43,6 @@ if __name__ == '__main__':
     cvr_files = os.listdir('cvr/')
     # cvr_files = ['Moab_11022021_CityCouncil.csv']
 
-
     start = time.time()
 
     if args.op == 'election-stats':
@@ -51,7 +50,7 @@ if __name__ == '__main__':
 
     if args.op == 'precinct-stats':
         pass
-    if args.op == 'append-kml':
+    if args.op == 'style-kml':
         pass
     if args.op == 'parse-census':
         pass
