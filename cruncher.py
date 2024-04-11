@@ -7,6 +7,7 @@ import csv
 import warnings
 
 from election_stats.election_stats import parse_election_stats
+from precinct_stats.precinct_stats import parse_precinct_stats
 
 from util import *
 
@@ -49,7 +50,8 @@ if __name__ == '__main__':
         data = parse_election_stats(cvr_files, args.verbose)
 
     if args.op == 'precinct-stats':
-        pass
+        data = parse_election_stats(cvr_files, args.verbose)
+
     if args.op == 'style-kml':
         pass
     if args.op == 'parse-census':
