@@ -28,6 +28,8 @@ def appendData(mark, key, value):
 def lerpColor(a, b='ffffffff', t=0):
     HEX = '0123456789abcdef'
 
+    t = max(0, min(1, t))
+
     def toNum(h):
         return HEX.rfind(h[0])*16 + HEX.rfind(h[1])
 
@@ -70,7 +72,7 @@ RACE_COLORS = {
 }
 
 
-def apply_data_to_kml(precincts, key, max_value, use_race_colors, kml):
+def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
     max_height = 5000;
 
     # Removing any precincts that don't line up with the data (I should probably clean this up)
@@ -88,7 +90,16 @@ def apply_data_to_kml(precincts, key, max_value, use_race_colors, kml):
         # Add label
         appendData(mark, f'{key.replace('total_', '')}_percent', f'{round(error*100, 2)}%')
         # Style
-        color = lerpColor('ffff0000', 'ff00ff00', (1-(min(max_value,error)/max_value)))
+        if apply_race_colors:
+            race = sorted(list(RACE_COLORS.keys()), key=lambda race: float(precincts[pre(mark)][race]))[-1]
+
+            t = float(precincts[pre(mark)][race]) / float(precincts[pre(mark)]['Precinct Pop.'])
+            t = (t - .3) / (.5 - .3)# inv lerp 30% - 50%
+
+            color = lerpColor(RACE_COLORS[race][0], RACE_COLORS[race][1], t)
+        else:
+            f = min(max_value,error)/max_value
+            color = lerpColor('ffffffff', 'ff0000ff', f)
         mark['Style'] = {
             'LineStyle': {
                 'color': color
@@ -107,7 +118,7 @@ def apply_data_to_kml(precincts, key, max_value, use_race_colors, kml):
 
 def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
     # load base kml
-    with open('ops/precincts_to_kml/kml/test.kml') as f:
+    with open('ops/precincts_to_kml/kml/alameda_2022.kml') as f:
         text = f.read()
     kml = xmltodict.parse(text)
 
