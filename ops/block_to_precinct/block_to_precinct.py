@@ -3,16 +3,20 @@ from copy import copy
 from collections import defaultdict
 import time
 
+from util import *
+
 columns = {
     ' !!Total:' : 'Precinct Pop.',
-    ' !!Total:!!Population of one race:!!White alone': 'White',
-    ' !!Total:!!Population of one race:!!Black or African American alone': 'Black or African American',
-    ' !!Total:!!Population of one race:!!American Indian and Alaska Native alone': 'American Indian and Alaska Native',
-    ' !!Total:!!Population of one race:!!Asian alone': 'Asian',
-    ' !!Total:!!Population of one race:!!Native Hawaiian and Other Pacific Islander alone': 'Native Hawaiian and Other Pacific Islander',
-    ' !!Total:!!Population of one race:!!Some Other Race alone': 'Some Other Race',
-    ' !!Total:!!Population of two or more races:': 'Two or more races',
+    ' !!Total:!!Hispanic or Latino': 'Hispanic',
+    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!White alone': 'White',
+    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Black or African American alone': 'Black or African American',
+    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!American Indian and Alaska Native alone': 'American Indian and Alaska Native',
+    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Asian alone': 'Asian',
+    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Native Hawaiian and Other Pacific Islander alone': 'Native Hawaiian and Other Pacific Islander',
+    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Some Other Race alone': 'Some Other Race',
+    ' !!Total:!!Not Hispanic or Latino:!!Population of two or more races:': 'Two or more races',
 }
+
 
 def parse_block_to_precinct(block_file, mapper_file, output_file):
     # load census block data
@@ -37,7 +41,7 @@ def parse_block_to_precinct(block_file, mapper_file, output_file):
     for b, _ in blocks.iterrows():
         i = i + 1
         if i%1000 == 0:
-            print(i, time.time()-start)
+            log(i, time.time()-start)
 
         # an attempt to remove the loop, but it actually ran slower 😭
         #m = mapper.loc[mapper['block'] == b.split('US')[1]]

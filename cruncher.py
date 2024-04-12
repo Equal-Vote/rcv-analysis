@@ -57,7 +57,7 @@ if __name__ == '__main__':
         data = parse_precinct_stats(cvr_files, args.verbose)
 
     if args.op == 'block-to-precinct':
-        data = parse_block_to_precinct(args.precincts_file, args.mapper_file, args.output)
+        data = parse_block_to_precinct(args.block_file, args.mapper_file, args.output)
 
     if args.op == 'precincts-to-kml':
         data = precincts_to_kml(args.precincts_file, args.output, args.z_axis, args.apply_race_colors)

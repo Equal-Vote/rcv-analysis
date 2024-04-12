@@ -1,136 +1,126 @@
 import csv
+import random
+import json
+import re
 
-from pykml import parser
-from lxml import etree
+import xmltodict
 
-def apply_precinct_to_kml(precinct, kml):
-    max_coordinate = 1000
-    root = kml.getroot()
-    marks = root.Document.findall('Placemark')
-    print(marks)
+
+def pre(mark):
+    if 'Data' in mark['ExtendedData']:
+        return [d['value'] for d in mark['ExtendedData']['Data'] if d['@name'] == 'Precinct_ID'][0]
+    else:
+        return [d['#text'] for d in mark['ExtendedData']['SchemaData']['SimpleData'] if d['@name'] == 'Precinct_ID'][0]
+
+
+def appendData(mark, key, value):
+    if 'Data' in mark['ExtendedData']:
+        mark['ExtendedData']['Data'].append({
+            '@name': key,
+            'value': value
+        })
+    else:
+        mark['ExtendedData']['SchemaData']['SimpleData'].append({
+            '@name': key,
+            '#text': value
+        })
+
+def lerpColor(a, b='ffffffff', t=0):
+    HEX = '0123456789abcdef'
+
+    def toNum(h):
+        return HEX.rfind(h[0])*16 + HEX.rfind(h[1])
+
+    def toHex(i):
+        i = round(i)
+        return f'{HEX[i // 16]}{HEX[i % 16]}'
+
+    def parseColor(h):
+        return {
+            'a': toNum(h[:2]),
+            'b': toNum(h[2:4]),
+            'g': toNum(h[4:6]),
+            'r': toNum(h[6:]),
+        }
+
+    def colorToHex(c):
+        return f'{toHex(c['a'])}{toHex(c['b'])}{toHex(c['g'])}{toHex(c['r'])}'
+    
+    aa = parseColor(a)
+    bb = parseColor(b)
+    cc = {
+        'r': aa['r'] * (1-t) + bb['r'] * t,
+        'g': aa['g'] * (1-t) + bb['g'] * t,
+        'b': aa['b'] * (1-t) + bb['b'] * t,
+        'a': aa['a'] * (1-t) + bb['a'] * t,
+    }
+    return colorToHex(cc)
+
+
+RACE_COLORS = {
+    'White': [ 'ffe2ecfe', 'ffb8b2ff'],
+    'Black or African American': [ 'ffd9e5fd', 'ff91aff9'],
+    'American Indian and Alaska Native': [ 'fff7f7f7', 'ffcccccc'],
+    'Asian': [ 'ffe8f8ed', 'ffafe7b6'],
+    'Hispanic': [ 'fffff3ef', 'ffe4d7be'],
+    # these colors were defined in my reference graphic, I'll add them as needed
+    'Native Hawaiian and Other Pacific Islander': [ 'ff000000', 'ffffffff'],
+    'Some Other Race': [ 'ff000000', 'ffffffff'],
+    'Two or more races':[ 'ff000000', 'ffffffff']
+}
+
+
+def apply_data_to_kml(precincts, key, max_value, use_race_colors, kml):
+    max_height = 5000;
+
+    # Removing any precincts that don't line up with the data (I should probably clean this up)
+    if 'Folder' in kml['kml']['Document']:
+        root = kml['kml']['Document']['Folder']
+    else:
+        root = kml['kml']['Document']
+
+    root['Placemark'] = [mark for mark in root['Placemark'] if pre(mark) in precincts]
+
+    for mark in root['Placemark']:
+        if 'Polygon' not in mark:
+            continue
+        error = (float(precincts[pre(mark)][key]) / float(precincts[pre(mark)]['total_ballots'])) / max_value
+        # Add label
+        appendData(mark, f'{key.replace('total_', '')}_percent', f'{round(error*100, 2)}%')
+        # Style
+        color = lerpColor('ffff0000', 'ff00ff00', (1-(min(max_value,error)/max_value)))
+        mark['Style'] = {
+            'LineStyle': {
+                'color': color
+            },
+            'PolyStyle': {
+                'color': color
+            },
+        }
+        # Enable extrusion
+        mark['Polygon']['extrude'] = '1'
+        mark['Polygon']['altitudeMode'] = 'relativeToGround'
+        # Update coordindates
+        ring = mark['Polygon']['outerBoundaryIs']['LinearRing']
+        ring['coordinates'] = ' '.join([f'{c},{max_height * error}' for c in re.split(r'\\n|\s', ring['coordinates'])])
+
 
 def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
     # load base kml
-    with open('ops/precincts_to_kml/kml/sample.kml') as f:
-        kml = parser.parse(f)
+    with open('ops/precincts_to_kml/kml/test.kml') as f:
+        text = f.read()
+    kml = xmltodict.parse(text)
 
     # load precincts file
+    precincts = {}
     with open(precincts_file) as f:
         reader = csv.DictReader(f)
         for row in reader:
-            apply_precinct_to_kml(row, kml)
+            precincts[row['precinct']] = row
+    
+    # modify
+    m = apply_data_to_kml(precincts, z_axis or 'total_irregular', .5, apply_race_colors, kml)
 
     # write kml
     with open(output_file, 'w') as f:
-        f.write(str(etree.tostring(kml, pretty_print=True), encoding='utf-8'))
-
-
-
-'''
-<kml xmlns="http://www.opengis.net/kml/2.2"><Document><Placemark>
-<Polygon>
-  <extrude>1</extrude>
-  <altitudeMode>relativeToGround</altitudeMode>
-  <outerBoundaryIs>
-    <LinearRing>
-      <coordinates>
-        -77.05788457660967,38.87253259892824,100
-        -77.05465973756702,38.87291016281703,100
-        -77.05315536854791,38.87053267794386,100
-        -77.05552622493516,38.868757801256,100
-        -77.05844056290393,38.86996206506943,100
-        -77.05788457660967,38.87253259892824,100
-      </coordinates>
-    </LinearRing>
-  </outerBoundaryIs>
-  <innerBoundaryIs>
-    <LinearRing>
-      <coordinates>
-        -77.05668055019126,38.87154239798456,100
-        -77.05542625960818,38.87167890344077,100
-        -77.05485125901024,38.87076535397792,100
-        -77.05577677433152,38.87008686581446,100
-        -77.05691162017543,38.87054446963351,100
-        -77.05668055019126,38.87154239798456,100
-      </coordinates>
-    </LinearRing>
-  </innerBoundaryIs>
-</Polygon>
-</Placemark></Document></kml>
-'''
-
-'''
-<Placemark>
-<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><color>aa0000ff</color></PolyStyle></Style>
-<ExtendedData>
-  <Data name="stroke-opacity"><value>1</value></Data>
-  <Data name="stroke"><value>#ff0000</value></Data>
-  <Data name="OBJECTID"><value>1863</value></Data>
-  <Data name="precinct"><value>280300</value></Data>
-  <Data name="ID"><value>280300</value></Data>
-  <Data name="Shape__Area"><value>684456.58203125</value></Data>
-  <Data name="Shape__Length"><value>7524.64032796479</value></Data>
-  <Data name="OverVotesPercent"><value></value></Data></ExtendedData>
-  <Polygon><altitudeMode>relativeToGround</altitudeMode><extrude>1</extrude>
-<outerBoundaryIs>
-  <LinearRing><coordinates>-122.227430897682,37.8323909666799
--122.22742726759,37.8323913164619
--122.227399859092,37.8323928929641
--122.22739887903,37.8323929192154
--122.22739427247,37.8323930043551
--122.227392659994,37.8323930263495
--122.227333870648,37.8323896221831
--122.227330945734,37.8323892518257
--122.227290078676,37.8323817538614
--122.22728965557,37.8323816566603
--122.227375502172,37.8324267870437
--122.227377820724,37.8324283209754
--122.227378277966,37.8324286267684
--122.227383409143,37.8324321472904
--122.227399608462,37.8324441200438
--122.2273997486,37.8324442293062
--122.227438032102,37.8324788761376
--122.227439673324,37.8324805952466
--122.227449670675,37.8324917712282
--122.227451439458,37.83249383799
--122.227460834937,37.8325055851136
--122.227465652602,37.832512062101
--122.22747015945,37.8325184731046
--122.227472027047,37.8325212372998
--122.227518094452,37.8326760994727
--122.227517925568,37.8326802209245
--122.226989817691,37.8326342059563
--122.224114651826,37.8303397392045
--122.224067642988,37.8298068668432
--122.227410496942,37.8290300704837
--122.230413087033,37.8311889860444
--122.232478883403,37.8308187536426
--122.23131939373,37.8286946610454
--122.23386728537,37.827986443464
--122.234066520921,37.8274547440137
--122.234801860253,37.8290809266861
--122.237296265303,37.8291973212429
--122.241866077798,37.8284430767133
--122.241811354227,37.8282057986329
--122.242985132503,37.8280069711427
--122.244210786691,37.8283341502521
--122.243622700997,37.8297416057088
--122.243518788376,37.8298142345172
--122.243475721345,37.8300648236853
--122.24285591524,37.8299950104989
--122.242772876772,37.8299982977049
--122.23906505708,37.8304918111759
--122.237127970426,37.8310326236841
--122.236679233195,37.8311450596501
--122.233886748269,37.8313394456844
--122.233783177009,37.8313545617308
--122.231330818504,37.8315606121848
--122.230793198366,37.8327161546668
--122.228494527233,37.8327603582472
--122.228466143165,37.8326821819663
--122.227764158279,37.8323402660104
--122.227762720077,37.8323397913566
--122.227714898263,37.832329202816
--122.227711306798,37.8323287913075
--122.227430897682,37.8323909666799</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark></Document></kml>
-'''
+        f.write(xmltodict.unparse(kml))
