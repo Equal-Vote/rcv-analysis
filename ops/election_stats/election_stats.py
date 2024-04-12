@@ -50,7 +50,6 @@ data = defaultdict( lambda: {
     'first_round_winner_percent': '',
     'final_round_winner_percent': '',
     'first_round_winner_place': '',
-    
 })
 
 def add_overrides():

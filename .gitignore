@@ -1,5 +1,6 @@
 cvr/*
 cvr_all/*
 output.csv
+output.kml
 helper/*
 **__pycache__**

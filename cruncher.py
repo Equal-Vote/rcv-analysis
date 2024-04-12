@@ -9,6 +9,7 @@ import warnings
 from ops.election_stats.election_stats import parse_election_stats
 from ops.precinct_stats.precinct_stats import parse_precinct_stats
 from ops.block_to_precinct.block_to_precinct import parse_block_to_precinct
+from ops.precincts_to_kml.precincts_to_kml import precincts_to_kml
 
 from util import *
 
@@ -16,16 +17,15 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'style-kml', 'block-to-precinct'])
+    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'precincts-to-kml', 'block-to-precinct'])
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
     # block to precinct
     parser.add_argument('-m', '--mapper-file')
     parser.add_argument('-b', '--block-file')
     # kml specific args
-    parser.add_argument('-k', '--base-kml')
-    parser.add_argument('-e', '--election-file')
-    parser.add_argument('-c', '--color', choices=['race'])
+    parser.add_argument('-p', '--precincts-file')
+    parser.add_argument('-r', '--apply-race-colors', action='store_true')
     parser.add_argument('-z', '--z-axis')
     return parser.parse_args()
 
@@ -57,10 +57,10 @@ if __name__ == '__main__':
         data = parse_precinct_stats(cvr_files, args.verbose)
 
     if args.op == 'block-to-precinct':
-        data = parse_block_to_precinct(args.block_file, args.mapper_file, args.output)
+        data = parse_block_to_precinct(args.precincts_file, args.mapper_file, args.output)
 
-    if args.op == 'style-kml':
-        pass
+    if args.op == 'precincts-to-kml':
+        data = precincts_to_kml(args.precincts_file, args.output, args.z_axis, args.apply_race_colors)
 
     log(f'Total Time: {round(time.time()-start)}s')
 
