@@ -4,12 +4,15 @@ from pykml import parser
 from lxml import etree
 
 def apply_precinct_to_kml(precinct, kml):
-    pass
+    max_coordinate = 1000
+    root = kml.getroot()
+    marks = root.Document.findall('Placemark')
+    print(marks)
 
 def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
     # load base kml
-    with open('ops/precincts_to_kml/kml/alameda_2022.kml') as f:
-      kml = parser.parse(f)
+    with open('ops/precincts_to_kml/kml/sample.kml') as f:
+        kml = parser.parse(f)
 
     # load precincts file
     with open(precincts_file) as f:
@@ -19,7 +22,7 @@ def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
 
     # write kml
     with open(output_file, 'w') as f:
-      f.write(str(etree.tostring(kml, pretty_print=True), encoding='utf-8'))
+        f.write(str(etree.tostring(kml, pretty_print=True), encoding='utf-8'))
 
 
 
