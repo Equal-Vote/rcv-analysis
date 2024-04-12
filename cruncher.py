@@ -20,6 +20,7 @@ def get_args():
     parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'precincts-to-kml', 'block-to-precinct'])
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-y', '--census-year', default='2020')
     # block to precinct
     parser.add_argument('-m', '--mapper-file')
     parser.add_argument('-b', '--block-file')
@@ -57,7 +58,7 @@ if __name__ == '__main__':
         data = parse_precinct_stats(cvr_files, args.verbose)
 
     if args.op == 'block-to-precinct':
-        data = parse_block_to_precinct(args.block_file, args.mapper_file, args.output)
+        data = parse_block_to_precinct(args.block_file, args.mapper_file, args.output, args.census_year)
 
     if args.op == 'precincts-to-kml':
         data = precincts_to_kml(args.precincts_file, args.output, args.z_axis, args.apply_race_colors)

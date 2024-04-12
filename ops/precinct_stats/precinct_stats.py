@@ -11,7 +11,7 @@ from util import log
 
 data = defaultdict( lambda: {
     # These are derived values
-    'election': '',
+    'elections': 0,
     'precinct': '',
     # These are empty unless there's an override
     'note1': '',
@@ -20,26 +20,26 @@ data = defaultdict( lambda: {
     'note4': '',
     'note5': '',
     # These are set based on rcv cruncher
-    'first_round_overvote': '',
-    'ranked_single': '',
-    'ranked_multiple': '',
-    'ranked_3_or_more': '',
-    'mean_rankings_used': '',
-    'total_fully_ranked': '',
-    'includes_duplicate_ranking': '',
-    'includes_overvote_ranking': '',
-    'includes_skipped_ranking': '',
-    'total_irregular': '',
-    'total_ballots': '',
-    'total_pretally_exhausted': '',
-    'total_posttally_exhausted': '',
-    'total_posttally_exhausted_by_overvote': '',
-    'total_posttally_exhausted_by_skipped_rankings': '',
-    'total_posttally_exhausted_by_abstention': '',
-    'total_posttally_exhausted_by_rank_limit': '',
-    'total_posttally_exhausted_by_rank_limit_fully_ranked': '',
-    'total_posttally_exhausted_by_rank_limit_partially_ranked': '',
-    'total_posttally_exhausted_by_duplicate_rankings': '',
+    'first_round_overvote': 0,
+    'ranked_single': 0,
+    'ranked_multiple': 0,
+    'ranked_3_or_more': 0,
+    'mean_rankings_used': 0,
+    'total_fully_ranked': 0,
+    'includes_duplicate_ranking': 0,
+    'includes_overvote_ranking': 0,
+    'includes_skipped_ranking': 0,
+    'total_irregular': 0,
+    'total_ballots': 0,
+    'total_pretally_exhausted': 0,
+    'total_posttally_exhausted': 0,
+    'total_posttally_exhausted_by_overvote': 0,
+    'total_posttally_exhausted_by_skipped_rankings': 0,
+    'total_posttally_exhausted_by_abstention': 0,
+    'total_posttally_exhausted_by_rank_limit': 0,
+    'total_posttally_exhausted_by_rank_limit_fully_ranked': 0,
+    'total_posttally_exhausted_by_rank_limit_partially_ranked': 0,
+    'total_posttally_exhausted_by_duplicate_rankings': 0,
     # These are from the census demographics
     'Precinct Pop.': '',
     'White': '',
@@ -52,9 +52,9 @@ data = defaultdict( lambda: {
 })
 
 
-def parse_precinct_stats(file_names, verbose):
+def parse_precinct_stats(file_names, verbose, census_year):
     demographics = {}
-    with open('ops/precinct_stats/demographics/alameda_2020.csv') as f:
+    with open(f'ops/precinct_stats/demographics/{census_year}.csv') as f:
         reader = csv.DictReader(f)
         for row in reader:
             demographics[row['precinct']] = row
@@ -84,32 +84,43 @@ def parse_precinct_stats(file_names, verbose):
             # Generate rows
             for i in range(len(stats['field'])):
                 precinct = str(stats['value'][i])
-                data[f'{election_name}_{precinct}'].update({
-                    'election': election_name,
+                data[precinct].update({
                     'precinct': precinct,
-
-                    'first_round_overvote': stats['first_round_overvote'][i],
-                    'ranked_single': stats['ranked_single'][i],
-                    'ranked_multiple': stats['ranked_multiple'][i],
-                    'ranked_3_or_more': stats['ranked_3_or_more'][i],
-                    'mean_rankings_used': stats['mean_rankings_used'][i],
-                    'total_fully_ranked': stats['total_fully_ranked'][i],
-                    'includes_duplicate_ranking': stats['includes_duplicate_ranking'][i],
-                    'includes_overvote_ranking': stats['includes_overvote_ranking'][i],
-                    'includes_skipped_ranking': stats['includes_skipped_ranking'][i],
-                    'total_irregular': stats['total_irregular'][i],
-                    'total_ballots': stats['total_ballots'][i],
-                    'total_pretally_exhausted': stats['total_pretally_exhausted'][i],
-                    'total_posttally_exhausted': stats['total_posttally_exhausted'][i],
-                    'total_posttally_exhausted_by_overvote': stats['total_posttally_exhausted_by_overvote'][i],
-                    'total_posttally_exhausted_by_skipped_rankings': stats['total_posttally_exhausted_by_skipped_rankings'][i],
-                    'total_posttally_exhausted_by_abstention': stats['total_posttally_exhausted_by_abstention'][i],
-                    'total_posttally_exhausted_by_rank_limit': stats['total_posttally_exhausted_by_rank_limit'][i],
-                    'total_posttally_exhausted_by_rank_limit_fully_ranked': stats['total_posttally_exhausted_by_rank_limit_fully_ranked'][i],
-                    'total_posttally_exhausted_by_rank_limit_partially_ranked': stats['total_posttally_exhausted_by_rank_limit_partially_ranked'][i],
-                    'total_posttally_exhausted_by_duplicate_rankings': stats['total_posttally_exhausted_by_duplicate_rankings'][i],
                 })
-                data[f'{election_name}_{precinct}'].update(demographics[precinct])
+                data[precinct]['elections'] = data[precinct]['elections']+1
+
+                data[precinct]['mean_rankings_used'] = \
+                    (
+                        data[precinct]['mean_rankings_used'] * data[precinct]['total_ballots'] +
+                        stats['mean_rankings_used'][i] * stats['total_ballots'][i]
+                    ) / (
+                        data[precinct]['total_ballots'] + stats['total_ballots'][i]
+                    )
+
+                for key in [
+                    'first_round_overvote',
+                    'ranked_single',
+                    'ranked_multiple',
+                    'ranked_3_or_more',
+                    'total_fully_ranked',
+                    'includes_duplicate_ranking',
+                    'includes_overvote_ranking',
+                    'includes_skipped_ranking',
+                    'total_irregular',
+                    'total_ballots',
+                    'total_pretally_exhausted',
+                    'total_posttally_exhausted',
+                    'total_posttally_exhausted_by_overvote',
+                    'total_posttally_exhausted_by_skipped_rankings',
+                    'total_posttally_exhausted_by_abstention',
+                    'total_posttally_exhausted_by_rank_limit',
+                    'total_posttally_exhausted_by_rank_limit_fully_ranked',
+                    'total_posttally_exhausted_by_rank_limit_partially_ranked',
+                    'total_posttally_exhausted_by_duplicate_rankings',
+                ]:
+                    data[precinct][key] = data[precinct][key] + stats[key][i]
+
+                data[precinct].update(demographics[precinct])
 
             log(f'{round(time.time()-start)}s')
 

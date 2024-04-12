@@ -60,11 +60,11 @@ def lerpColor(a, b='ffffffff', t=0):
 
 
 RACE_COLORS = {
-    'White': [ 'ffe2ecfe', 'ffb8b2ff'],
-    'Black or African American': [ 'ffd9e5fd', 'ff91aff9'],
-    'American Indian and Alaska Native': [ 'fff7f7f7', 'ffcccccc'],
-    'Asian': [ 'ffe8f8ed', 'ffafe7b6'],
-    'Hispanic': [ 'fffff3ef', 'ffe4d7be'],
+    'White': [ 'ffcac3ff', 'ff7b68ff'],
+    'Black or African American': [ 'ffa1c8ff', 'ff167dff'],
+    'American Indian and Alaska Native': [ 'ffeaeaea', 'ffcccccc'],
+    'Asian': [ 'ffe8f8ed', 'ffc6ffcf'],
+    'Hispanic': [ 'fffff4ce', 'ffffe392'],
     # these colors were defined in my reference graphic, I'll add them as needed
     'Native Hawaiian and Other Pacific Islander': [ 'ff000000', 'ffffffff'],
     'Some Other Race': [ 'ff000000', 'ffffffff'],
@@ -104,7 +104,7 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
             color = lerpColor('ffffffff', 'ff0000ff', f)
         mark['Style'] = {
             'LineStyle': {
-                'color': color,
+                'color': lerpColor(color, 'ff000000', .7),
                 'gx:labelVisibility': '1'
             },
             'PolyStyle': {
@@ -112,6 +112,7 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
             },
             'IconStyle': {
                 'Icon': {
+                    # 'href': 'https://cdn-icons-png.flaticon.com/512/25/25613.png'
                     'href': 'https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png'
                 }
             }
@@ -142,8 +143,6 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
             }
         }
         del mark['Polygon']
-
-
 
 def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
     # load base kml

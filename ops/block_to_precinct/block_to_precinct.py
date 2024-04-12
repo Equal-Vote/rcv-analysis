@@ -6,24 +6,39 @@ import time
 from util import *
 
 columns = {
-    ' !!Total:' : 'Precinct Pop.',
-    ' !!Total:!!Hispanic or Latino': 'Hispanic',
-    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!White alone': 'White',
-    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Black or African American alone': 'Black or African American',
-    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!American Indian and Alaska Native alone': 'American Indian and Alaska Native',
-    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Asian alone': 'Asian',
-    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Native Hawaiian and Other Pacific Islander alone': 'Native Hawaiian and Other Pacific Islander',
-    ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Some Other Race alone': 'Some Other Race',
-    ' !!Total:!!Not Hispanic or Latino:!!Population of two or more races:': 'Two or more races',
+    # 2020 format
+    '2020': {
+        ' !!Total:' : 'Precinct Pop.',
+        ' !!Total:!!Hispanic or Latino': 'Hispanic',
+        ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!White alone': 'White',
+        ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Black or African American alone': 'Black or African American',
+        ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!American Indian and Alaska Native alone': 'American Indian and Alaska Native',
+        ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Asian alone': 'Asian',
+        ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Native Hawaiian and Other Pacific Islander alone': 'Native Hawaiian and Other Pacific Islander',
+        ' !!Total:!!Not Hispanic or Latino:!!Population of one race:!!Some Other Race alone': 'Some Other Race',
+        ' !!Total:!!Not Hispanic or Latino:!!Population of two or more races:': 'Two or more races',
+    },
+    # 2010 format
+    '2010': {
+        'Total' : 'Precinct Pop.',
+        'Total!!Hispanic or Latino': 'Hispanic',
+        'Total!!Not Hispanic or Latino!!Population of one race!!White alone': 'White',
+        'Total!!Not Hispanic or Latino!!Population of one race!!Black or African American alone': 'Black or African American',
+        'Total!!Not Hispanic or Latino!!Population of one race!!American Indian and Alaska Native alone': 'American Indian and Alaska Native',
+        'Total!!Not Hispanic or Latino!!Population of one race!!Asian alone': 'Asian',
+        'Total!!Not Hispanic or Latino!!Population of one race!!Native Hawaiian and Other Pacific Islander alone': 'Native Hawaiian and Other Pacific Islander',
+        'Total!!Not Hispanic or Latino!!Population of one race!!Some Other Race alone': 'Some Other Race',
+        'Total!!Not Hispanic or Latino!!Two or More Races': 'Two or more races',
+    }
 }
 
 
-def parse_block_to_precinct(block_file, mapper_file, output_file):
+def parse_block_to_precinct(block_file, mapper_file, output_file, census_year):
     # load census block data
     types = defaultdict(lambda: 'float')
     types['Geography'] = 'string'
     types['Geographic Area Name'] = 'string'
-    blocks = pd.read_csv(block_file, index_col='Geography', dtype=types, header=1)[columns.keys()].rename(columns=columns)
+    blocks = pd.read_csv(block_file, index_col='Geography', dtype=types, header=1)[columns['census_year'].keys()].rename(columns=columns['census_year'])
 
     # load block to precinct mapper
     types = defaultdict(lambda: 'float')
@@ -31,7 +46,7 @@ def parse_block_to_precinct(block_file, mapper_file, output_file):
     mapper = mapper.dropna(subset=['mprec'])
 
     # init precincts
-    precincts = pd.DataFrame(columns=columns.values(), index=mapper.mprec.unique())
+    precincts = pd.DataFrame(columns=columns['census_year'].values(), index=mapper.mprec.unique())
 
     for p in precincts:
         precincts[p].values[:]  = 0
@@ -41,7 +56,7 @@ def parse_block_to_precinct(block_file, mapper_file, output_file):
     for b, _ in blocks.iterrows():
         i = i + 1
         if i%1000 == 0:
-            log(i, time.time()-start)
+            print(i, time.time()-start)
 
         # an attempt to remove the loop, but it actually ran slower 😭
         #m = mapper.loc[mapper['block'] == b.split('US')[1]]
