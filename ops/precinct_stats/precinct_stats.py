@@ -3,6 +3,7 @@ import time
 import traceback
 from collections import defaultdict
 from pathlib import Path
+import csv
 
 from rcv_cruncher import rank_column_csv, SingleWinner, CastVoteRecord
 
@@ -39,10 +40,25 @@ data = defaultdict( lambda: {
     'total_posttally_exhausted_by_rank_limit_fully_ranked': '',
     'total_posttally_exhausted_by_rank_limit_partially_ranked': '',
     'total_posttally_exhausted_by_duplicate_rankings': '',
+    # These are from the census demographics
+    'Precinct Pop.': '',
+    'White': '',
+    'Black or African American': '',
+    'American Indian and Alaska Native': '',
+    'Asian': '',
+    'Native Hawaiian and Other Pacific Islander': '',
+    'Some Other Race': '',
+    'Two or more races': '',
 })
 
 
 def parse_precinct_stats(file_names, verbose):
+    demographics = {}
+    with open('ops/precinct_stats/demographics/alameda_2020.csv') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            demographics[row['precinct']] = row
+
     for (i, file) in enumerate(file_names):
         election_name = file.split('.')[0]
         log(f'{i+1}/{len(file_names)} {election_name}....', end='')
@@ -67,9 +83,10 @@ def parse_precinct_stats(file_names, verbose):
 
             # Generate rows
             for i in range(len(stats['field'])):
-                data[f'{election_name}_{stats['value'][i]}'].update({
+                precinct = str(stats['value'][i])
+                data[f'{election_name}_{precinct}'].update({
                     'election': election_name,
-                    'precinct': stats['value'][i],
+                    'precinct': precinct,
 
                     'first_round_overvote': stats['first_round_overvote'][i],
                     'ranked_single': stats['ranked_single'][i],
@@ -92,6 +109,7 @@ def parse_precinct_stats(file_names, verbose):
                     'total_posttally_exhausted_by_rank_limit_partially_ranked': stats['total_posttally_exhausted_by_rank_limit_partially_ranked'][i],
                     'total_posttally_exhausted_by_duplicate_rankings': stats['total_posttally_exhausted_by_duplicate_rankings'][i],
                 })
+                data[f'{election_name}_{precinct}'].update(demographics[precinct])
 
             log(f'{round(time.time()-start)}s')
 

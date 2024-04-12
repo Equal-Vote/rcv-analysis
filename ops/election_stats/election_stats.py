@@ -50,6 +50,7 @@ data = defaultdict( lambda: {
     'first_round_winner_percent': '',
     'final_round_winner_percent': '',
     'first_round_winner_place': '',
+    
 })
 
 def add_overrides():
@@ -62,7 +63,6 @@ def add_overrides():
 
             row['election'] = election
             data[election].update(row)
-
 
 
 def parse_election_stats(file_names, verbose):
