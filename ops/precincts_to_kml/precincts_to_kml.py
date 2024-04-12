@@ -86,9 +86,11 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
     for mark in root['Placemark']:
         if 'Polygon' not in mark:
             continue
-        error = (float(precincts[pre(mark)][key]) / float(precincts[pre(mark)]['total_ballots'])) / max_value
+        error = (float(precincts[pre(mark)][key]) / float(precincts[pre(mark)]['total_ballots']))
         # Add label
         appendData(mark, f'{key.replace('total_', '')}_percent', f'{round(error*100, 2)}%')
+        mark['name'] = f'{round(error*100, 2)}%'
+        error = error / max_value
         # Style
         if apply_race_colors:
             race = sorted(list(RACE_COLORS.keys()), key=lambda race: float(precincts[pre(mark)][race]))[-1]
@@ -102,11 +104,17 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
             color = lerpColor('ffffffff', 'ff0000ff', f)
         mark['Style'] = {
             'LineStyle': {
-                'color': color
+                'color': color,
+                'gx:labelVisibility': '1'
             },
             'PolyStyle': {
                 'color': color
             },
+            'IconStyle': {
+                'Icon': {
+                    'href': 'https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png'
+                }
+            }
         }
         # Enable extrusion
         mark['Polygon']['extrude'] = '1'
@@ -114,6 +122,27 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
         # Update coordindates
         ring = mark['Polygon']['outerBoundaryIs']['LinearRing']
         ring['coordinates'] = ' '.join([f'{c},{max_height * error}' for c in re.split(r'\\n|\s', ring['coordinates'])])
+        # Add a point
+        # https://stackoverflow.com/questions/43112699/line-label-not-displayed-when-using-region-on-kml-file-for-ge#:~:text=This%20is%20a%20bug%20in,the%20location%20of%20the%20point.
+        a = 0
+        b = 0;
+        arr = ring['coordinates'].split(' ')
+        for pair in arr:
+            p = pair.split(',')
+            a = a + float(p[0])
+            b = b + float(p[1])
+        a = a / len(arr)
+        b = b / len(arr)
+        mark['MultiGeometry'] = {
+            'Polygon': mark['Polygon'],
+            'Point': {
+                'extrude': '1',
+                'altitudeMode': 'relativeToGround',
+                'coordinates': f'{a},{b},{(max_height * error)-400}'
+            }
+        }
+        del mark['Polygon']
+
 
 
 def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
