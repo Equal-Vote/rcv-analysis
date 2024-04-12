@@ -10,6 +10,11 @@ Here's additional fields that this computes:
 
 This project assumes you download CVRs from [here](https://dataverse.harvard.edu/dataverse/rcv_cvrs) and put them in a folder called `cvr` (I have Moab 2021 committed to the repo as an example)
 
+# Loading Demographic Data
+
+https://data.census.gov/table?g=050XX00US06001$1000000&y=2020
+https://statewidedatabase.org/d20/g22_geo_conv.html
+
 # Outputs
 
 Here's information for each of the output files (the date corresponds to the date the CVRs were imported from Dataverse, not the date the simulation was ran).

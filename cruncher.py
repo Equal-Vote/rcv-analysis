@@ -8,6 +8,7 @@ import warnings
 
 from ops.election_stats.election_stats import parse_election_stats
 from ops.precinct_stats.precinct_stats import parse_precinct_stats
+from ops.block_to_precinct.block_to_precinct import parse_block_to_precinct
 
 from util import *
 
@@ -15,13 +16,15 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'style-kml', 'parse-census'])
+    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'style-kml', 'block-to-precinct'])
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
+    # block to precinct
+    parser.add_argument('-m', '--mapper-file')
+    parser.add_argument('-b', '--block-file')
     # kml specific args
     parser.add_argument('-k', '--base-kml')
     parser.add_argument('-e', '--election-file')
-    parser.add_argument('-d', '--demographics-file')
     parser.add_argument('-c', '--color', choices=['race'])
     parser.add_argument('-z', '--z-axis')
     return parser.parse_args()
@@ -54,13 +57,14 @@ if __name__ == '__main__':
         data = parse_precinct_stats(cvr_files, args.verbose)
 
     if args.op == 'block-to-precinct':
+        data = parse_block_to_precinct(args.block_file, args.mapper_file, args.output)
 
     if args.op == 'style-kml':
         pass
 
     log(f'Total Time: {round(time.time()-start)}s')
 
-    if args.op in ('election-stats', 'precinct-stats', 'parse-census',):
+    if args.op in ('election-stats', 'precinct-stats',):
         if args.output:
             generate_csv(args.output)
         else:
