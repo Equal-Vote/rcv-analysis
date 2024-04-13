@@ -11,6 +11,7 @@ from util import log
 
 data = defaultdict( lambda: {
     # These are derived values
+    'election_name': '',
     'elections': 0,
     'precinct': '',
     # These are empty unless there's an override
@@ -52,13 +53,7 @@ data = defaultdict( lambda: {
 })
 
 
-def parse_precinct_stats(file_names, verbose, census_year):
-    demographics = {}
-    with open(f'ops/precinct_stats/demographics/{census_year}.csv') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            demographics[row['precinct']] = row
-
+def parse_precinct_stats(file_names, verbose, census_year, demographics):
     for (i, file) in enumerate(file_names):
         election_name = file.split('.')[0]
         log(f'{i+1}/{len(file_names)} {election_name}....', end='')
@@ -85,17 +80,22 @@ def parse_precinct_stats(file_names, verbose, census_year):
 
             for i in range(len(stats['field'])):
                 precinct = str(stats['value'][i])
-                data[precinct].update({
+                if precinct not in demographics:
+                    print(f"WARNING: couldn't find precinct {precinct} in demographics file")
+                    continue
+                data_key = f'{election_name}_{precinct}' # election_name + precinct is better for data analysis, just precinct is better for KML across elections
+                data[data_key].update({
+                    'election_name': f'{data[data_key]['election_name']}{election_name},',
                     'precinct': precinct,
                 })
-                data[precinct]['elections'] = data[precinct]['elections']+1
+                data[data_key]['elections'] = data[data_key]['elections']+1
 
-                data[precinct]['mean_rankings_used'] = \
+                data[data_key]['mean_rankings_used'] = \
                     (
-                        data[precinct]['mean_rankings_used'] * data[precinct]['total_ballots'] +
+                        data[data_key]['mean_rankings_used'] * data[data_key]['total_ballots'] +
                         stats['mean_rankings_used'][i] * stats['total_ballots'][i]
                     ) / (
-                        data[precinct]['total_ballots'] + stats['total_ballots'][i]
+                        data[data_key]['total_ballots'] + stats['total_ballots'][i]
                     )
 
                 for key in [
@@ -119,9 +119,9 @@ def parse_precinct_stats(file_names, verbose, census_year):
                     'total_posttally_exhausted_by_rank_limit_partially_ranked',
                     'total_posttally_exhausted_by_duplicate_rankings',
                 ]:
-                    data[precinct][key] = data[precinct][key] + stats[key][i]
+                    data[data_key][key] = data[data_key][key] + stats[key][i]
 
-                data[precinct].update(demographics[precinct])
+                data[data_key].update(demographics[precinct])
 
             log(f'{round(time.time()-start)}s')
 
