@@ -5,6 +5,7 @@ import time
 import json
 import csv
 import warnings
+import pandas
 
 from ops.election_stats.election_stats import parse_election_stats
 from ops.precinct_stats.precinct_stats import parse_precinct_stats
@@ -17,7 +18,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'precincts-to-kml', 'block-to-precinct'])
+    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'precincts-to-kml', 'block-to-precinct',])
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
     parser.add_argument('-y', '--census-year', default='2020')
@@ -29,6 +30,27 @@ def get_args():
     parser.add_argument('-r', '--apply-race-colors', action='store_true')
     parser.add_argument('-z', '--z-axis')
     return parser.parse_args()
+
+
+def clean_cvrs(cvrs):
+    log('cleaning cvrs...')
+    for cvr in cvrs:
+        df = pandas.read_csv(f'cvr/{cvr}')
+
+        # Clean column
+        if 'precincts' in df.columns:
+            df = df.rename(columns={'precincts': 'precinct'})
+        
+        if 'precinct' not in df.columns:
+            raise Exception(f'precinct not in {df.columns} for {cvr}')
+
+        # Clean precinct numbers
+        # Examples:
+        # 213456 (055) # remove the extension
+        # 9213456 # precincts are 6 digits, ignore the 9
+        df['precinct'] = df['precinct'].apply(lambda p: str(p).split(' ')[0][-6:])
+        
+        df.to_csv(f'cvr/{cvr}', index=False)
 
 
 def generate_csv(file_name):
@@ -52,10 +74,12 @@ if __name__ == '__main__':
     start = time.time()
 
     if args.op == 'election-stats':
+        clean_cvrs(cvr_files)
         data = parse_election_stats(cvr_files, args.verbose)
 
     if args.op == 'precinct-stats':
-        data = parse_precinct_stats(cvr_files, args.verbose)
+        clean_cvrs(cvr_files)
+        data = parse_precinct_stats(cvr_files, args.verbose, args.census_year)
 
     if args.op == 'block-to-precinct':
         data = parse_block_to_precinct(args.block_file, args.mapper_file, args.output, args.census_year)

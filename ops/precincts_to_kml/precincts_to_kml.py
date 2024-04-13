@@ -81,7 +81,16 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
     else:
         root = kml['kml']['Document']
 
+    # print('KML original', sorted([pre(mark) for mark in root['Placemark']]))
     root['Placemark'] = [mark for mark in root['Placemark'] if pre(mark) in precincts]
+
+    if len(root['Placemark']) != len(precincts):
+        # print()
+        # print('KML ', sorted([pre(mark) for mark in root['Placemark']]))
+        # print()
+        # print('Data', sorted(list(precincts.keys())))
+        print(f"Warning! KML only has {len(root['Placemark'])} / {len(precincts)} precincts")
+        #raise Exception(f"Mismatch! KML only has {len(root['Placemark'])} / {len(precincts)} precincts")
 
     for mark in root['Placemark']:
         if 'Polygon' not in mark:
@@ -143,6 +152,7 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
             }
         }
         del mark['Polygon']
+
 
 def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
     # load base kml

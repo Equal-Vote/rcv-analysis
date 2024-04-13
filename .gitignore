@@ -1,5 +1,4 @@
-cvr/*
-cvr_all/*
+cvr**/**
 output.csv
 output.kml
 helper/*

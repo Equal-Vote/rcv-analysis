@@ -82,6 +82,7 @@ def parse_precinct_stats(file_names, verbose, census_year):
             stats = {k.replace('split_', ''):v for k,v in stats.items()}
 
             # Generate rows
+
             for i in range(len(stats['field'])):
                 precinct = str(stats['value'][i])
                 data[precinct].update({
