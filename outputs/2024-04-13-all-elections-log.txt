@@ -1,0 +1,742 @@
+$ python cruncher.py election-stats -o output.csv --verbose
+C:\w\rcv-analysis\cruncher.py:8: DeprecationWarning: 
+Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
+(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
+but was not found to be installed on your system.
+If this would cause problems for you,
+please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
+
+  import pandas
+1/468 Alaska_04102020_PRESIDENTOFTHEUNITEDSTATES....3s
+2/468 Alaska_08162022_HouseofRepresentativesSpecial....26s
+3/468 Alaska_11082022_GovernorLieutenantGovernor....36s
+4/468 Alaska_11082022_HouseDistrict1....1s
+5/468 Alaska_11082022_HouseDistrict10....1s
+6/468 Alaska_11082022_HouseDistrict11....1s
+7/468 Alaska_11082022_HouseDistrict12....1s
+8/468 Alaska_11082022_HouseDistrict13....1s
+9/468 Alaska_11082022_HouseDistrict14....1s
+10/468 Alaska_11082022_HouseDistrict15....1s
+11/468 Alaska_11082022_HouseDistrict16....1s
+12/468 Alaska_11082022_HouseDistrict17....1s
+13/468 Alaska_11082022_HouseDistrict18....0s
+14/468 Alaska_11082022_HouseDistrict19....0s
+15/468 Alaska_11082022_HouseDistrict2....1s
+16/468 Alaska_11082022_HouseDistrict20....1s
+17/468 Alaska_11082022_HouseDistrict21....1s
+18/468 Alaska_11082022_HouseDistrict22....0s
+19/468 Alaska_11082022_HouseDistrict23....1s
+20/468 Alaska_11082022_HouseDistrict24....1s
+21/468 Alaska_11082022_HouseDistrict25....1s
+22/468 Alaska_11082022_HouseDistrict26....1s
+23/468 Alaska_11082022_HouseDistrict27....1s
+24/468 Alaska_11082022_HouseDistrict28....1s
+25/468 Alaska_11082022_HouseDistrict29....1s
+26/468 Alaska_11082022_HouseDistrict3....1s
+27/468 Alaska_11082022_HouseDistrict30....1s
+28/468 Alaska_11082022_HouseDistrict31....1s
+29/468 Alaska_11082022_HouseDistrict32....0s
+30/468 Alaska_11082022_HouseDistrict33....1s
+31/468 Alaska_11082022_HouseDistrict34....1s
+32/468 Alaska_11082022_HouseDistrict35....1s
+33/468 Alaska_11082022_HouseDistrict36....1s
+34/468 Alaska_11082022_HouseDistrict37....0s
+35/468 Alaska_11082022_HouseDistrict38....0s
+36/468 Alaska_11082022_HouseDistrict39....0s
+37/468 Alaska_11082022_HouseDistrict4....1s
+38/468 Alaska_11082022_HouseDistrict40....0s
+39/468 Alaska_11082022_HouseDistrict5....1s
+40/468 Alaska_11082022_HouseDistrict6....1s
+41/468 Alaska_11082022_HouseDistrict7....1s
+42/468 Alaska_11082022_HouseDistrict8....1s
+43/468 Alaska_11082022_HouseDistrict9....1s
+44/468 Alaska_11082022_SenateDistrictA....2s
+45/468 Alaska_11082022_SenateDistrictB....2s
+46/468 Alaska_11082022_SenateDistrictC....2s
+47/468 Alaska_11082022_SenateDistrictD....2s
+48/468 Alaska_11082022_SenateDistrictE....2s
+49/468 Alaska_11082022_SenateDistrictF....2s
+50/468 Alaska_11082022_SenateDistrictG....1s
+51/468 Alaska_11082022_SenateDistrictH....2s
+52/468 Alaska_11082022_SenateDistrictI....1s
+53/468 Alaska_11082022_SenateDistrictJ....1s
+54/468 Alaska_11082022_SenateDistrictK....1s
+55/468 Alaska_11082022_SenateDistrictL....2s
+56/468 Alaska_11082022_SenateDistrictM....2s
+57/468 Alaska_11082022_SenateDistrictN....2s
+58/468 Alaska_11082022_SenateDistrictO....2s
+59/468 Alaska_11082022_SenateDistrictP....1s
+60/468 Alaska_11082022_SenateDistrictQ....2s
+61/468 Alaska_11082022_SenateDistrictR....2s
+62/468 Alaska_11082022_SenateDistrictS....1s
+63/468 Alaska_11082022_USRepresentative....40s
+64/468 Alaska_11082022_USSenator....41s
+65/468 Albany_11082022_BoardofEducation....2s
+66/468 Albany_11082022_CityCouncil....1s
+67/468 Albany_11082022_FAKECityCouncil....1s
+68/468 Berkeley_03072017_CityCouncilDistrict4....0s
+69/468 Berkeley_11022010_CityAuditor....5s
+70/468 Berkeley_11022010_CityCouncilDistrict1....1s
+71/468 Berkeley_11022010_CityCouncilDistrict4....1s
+72/468 Berkeley_11022010_CityCouncilDistrict7....1s
+73/468 Berkeley_11022010_CityCouncilDistrict8....1s
+74/468 Berkeley_11032020_MayorBerkeleyRCV....9s
+75/468 Berkeley_11032020_MemberCityCouncilDist2BerkeleyRCV....1s
+76/468 Berkeley_11032020_MemberCityCouncilDist3BerkeleyRCV....1s
+77/468 Berkeley_11032020_MemberCityCouncilDist5BerkeleyRCV....1s
+78/468 Berkeley_11032020_MemberCityCouncilDist6BerkeleyRCV....1s
+79/468 Berkeley_11042014_CityAuditor....4s
+80/468 Berkeley_11042014_CityCouncilDistrict1....1s
+81/468 Berkeley_11042014_CityCouncilDistrict7....0s
+82/468 Berkeley_11042014_CityCouncilDistrict8....1s
+83/468 Berkeley_11062012_CityCouncilDistrict2....1s
+84/468 Berkeley_11062012_CityCouncilDistrict3....1s
+85/468 Berkeley_11062012_CityCouncilDistrict5....1s
+86/468 Berkeley_11062012_CityCouncilDistrict6....1s
+87/468 Berkeley_11062012_Mayor....7s
+88/468 Berkeley_11062018_CityAuditor....6s
+89/468 Berkeley_11062018_CityCouncilDistrict1....1s
+90/468 Berkeley_11062018_CityCouncilDistrict4....1s
+91/468 Berkeley_11062018_CityCouncilDistrict7....0s
+92/468 Berkeley_11062018_CityCouncilDistrict8....1s
+93/468 Berkeley_11082016_CityCouncilDistrict2....1s
+94/468 Berkeley_11082016_CityCouncilDistrict3....1s
+95/468 Berkeley_11082016_CityCouncilDistrict5....1s
+96/468 Berkeley_11082016_CityCouncilDistrict6....1s
+97/468 Berkeley_11082016_Mayor....8s
+98/468 Bloomington_11072023_CityCouncilDistrict4....0s
+99/468 Bloomington_11072023_SpecialCityCouncilAtLarge....1s
+100/468 Boulder_11072023_Mayor....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1,5,6) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1,5,6) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+7s
+101/468 Burlington_03032009_Mayor....0s
+102/468 Burlington_03072006_Mayor....0s
+103/468 Burlington_03072023_CityCouncilCentralDistrict....0s
+104/468 Burlington_03072023_CityCouncilEastDistrict....0s
+105/468 Burlington_03072023_CityCouncilNorthDistrict....0s
+106/468 Burlington_03072023_CityCouncilSouthDistrict....0s
+107/468 Corvallis_11082022_CityCouncilWard9....0s
+108/468 Corvallis_11082022_Mayor....3s
+109/468 Easthampton_11022021_Mayor....ERROR
+Traceback (most recent call last):
+  File "C:\w\rcv-analysis\ops\election_stats\election_stats.py", line 97, in parse_election_stats
+    election = SingleWinner(
+               ^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\variants.py", line 57, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\base.py", line 280, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 333, in __init__
+    validated_cvr = self._validate_cvr(parsed_cvr)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 386, in _validate_cvr
+    raise RuntimeError("parsed ranks list is empty.")
+RuntimeError: parsed ranks list is empty.
+
+110/468 Eastpointe_11052019_CityCouncil....0s
+111/468 ElkRidge_11022021_Mayor....0s
+112/468 Genola_11022021_CityCouncil....0s
+113/468 Hawaii_05232020_PresidentoftheUnitedStateCD1....0s
+114/468 Hawaii_05232020_PresidentoftheUnitedStateCD1CD2....1s
+115/468 Hawaii_05232020_PresidentoftheUnitedStateCD2....1s
+116/468 Kansas_05022020_PRESIDENTOFTHEUNITEDSTATES....19s
+117/468 LasCruces_11052019_COUNCILORPOSITION2CITYOFLASCRUCESDISTRICT2COUNCILOR....1s
+118/468 LasCruces_11052019_COUNCILORPOSITION4CITYOFLASCRUCESDISTRICT4COUNCILOR....0s
+119/468 LasCruces_11052019_MAYORCITYOFLASCRUCES....3s
+120/468 Lehi_11022021_CityCouncil....3639s
+121/468 Maine_06122018_DemocraticPrimaryforCD2....2s
+122/468 Maine_06122018_DemocraticPrimaryforGovernor....7s
+123/468 Maine_07142020_DemocraticCandidateforMaineStateHouseDistrict41....0s
+124/468 Maine_07142020_DemocraticCandidateforMaineStateHouseDistrict47....0s
+125/468 Maine_07142020_DemocraticCandidateforMaineStateHouseDistrict49....0s
+126/468 Maine_07142020_DemocraticCandidateforMaineStateHouseDistrict90....0s
+127/468 Maine_07142020_DemocraticCandidateforMaineStateSenateDistrict11....1s
+128/468 Maine_07142020_RepublicanCandidateforUSHouseofRepresentativesDistrict2....7s
+129/468 Maine_11062018_CongressionalDistrict2....21695s
+130/468 Maine_11082022_CongressionalDistrict2....46s
+131/468 Minneapolis_08112020_Ward6CityCouncilSpecialElection....2s
+132/468 Minneapolis_11022021_CityCouncilWard1....1s
+133/468 Minneapolis_11022021_CityCouncilWard10....1s
+134/468 Minneapolis_11022021_CityCouncilWard11....1s
+135/468 Minneapolis_11022021_CityCouncilWard12....1s
+136/468 Minneapolis_11022021_CityCouncilWard13....1s
+137/468 Minneapolis_11022021_CityCouncilWard2....1s
+138/468 Minneapolis_11022021_CityCouncilWard3....1s
+139/468 Minneapolis_11022021_CityCouncilWard4....1s
+140/468 Minneapolis_11022021_CityCouncilWard5....1s
+141/468 Minneapolis_11022021_CityCouncilWard6....0s
+142/468 Minneapolis_11022021_CityCouncilWard7....1s
+143/468 Minneapolis_11022021_CityCouncilWard8....1s
+144/468 Minneapolis_11022021_CityCouncilWard9....1s
+145/468 Minneapolis_11022021_Mayor....23s
+146/468 Minneapolis_11022021_ParkBoardAtLarge....16s
+147/468 Minneapolis_11022021_ParkBoardDistrict1....2s
+148/468 Minneapolis_11022021_ParkBoardDistrict2....1s
+149/468 Minneapolis_11022021_ParkBoardDistrict3....1s
+150/468 Minneapolis_11022021_ParkBoardDistrict4....2s
+151/468 Minneapolis_11022021_ParkBoardDistrict5....2s
+152/468 Minneapolis_11022021_ParkBoardDistrict6....2s
+153/468 Minneapolis_11052013_Mayor....31s
+154/468 Minneapolis_11052013_PRBoardDistrict2....1s
+155/468 Minneapolis_11052013_PRBoardDistrict6....1s
+156/468 Minneapolis_11052013_Ward13CityCouncil....1s
+157/468 Minneapolis_11052013_Ward5CityCouncil....0s
+158/468 Minneapolis_11052013_Ward9CityCouncil....0s
+159/468 Minneapolis_11062009_Mayor....6s
+160/468 Minneapolis_11062009_PRBoardDistrict1....1s
+161/468 Minneapolis_11062009_PRBoardDistrict2....0s
+162/468 Minneapolis_11062009_PRBoardDistrict3....0s
+163/468 Minneapolis_11062009_PRBoardDistrict4....0s
+164/468 Minneapolis_11062009_PRBoardDistrict5....1s
+165/468 Minneapolis_11062009_PRBoardDistrict6....1s
+166/468 Minneapolis_11062009_Ward10CityCouncil....0s
+167/468 Minneapolis_11062009_Ward11CityCouncil....0s
+168/468 Minneapolis_11062009_Ward12CityCouncil....1s
+169/468 Minneapolis_11062009_Ward13CityCouncil....0s
+170/468 Minneapolis_11062009_Ward1CityCouncil....0s
+171/468 Minneapolis_11062009_Ward2CityCouncil....0s
+172/468 Minneapolis_11062009_Ward3CityCouncil....0s
+173/468 Minneapolis_11062009_Ward4CityCouncil....0s
+174/468 Minneapolis_11062009_Ward5CityCouncil....0s
+175/468 Minneapolis_11062009_Ward6CityCouncil....0s
+176/468 Minneapolis_11062009_Ward7CityCouncil....0s
+177/468 Minneapolis_11062009_Ward8CityCouncil....0s
+178/468 Minneapolis_11062009_Ward9CityCouncil....0s
+179/468 Minneapolis_11072017_Mayor....21s
+180/468 Minneapolis_11072017_PRBoardDistrict1....1s
+181/468 Minneapolis_11072017_PRBoardDistrict2....1s
+182/468 Minneapolis_11072017_PRBoardDistrict3....1s
+183/468 Minneapolis_11072017_PRBoardDistrict4....1s
+184/468 Minneapolis_11072017_PRBoardDistrict5....2s
+185/468 Minneapolis_11072017_PRBoardDistrict6....2s
+186/468 Minneapolis_11072017_Ward10CityCouncil....1s
+187/468 Minneapolis_11072017_Ward11CityCouncil....1s
+188/468 Minneapolis_11072017_Ward12CityCouncil....1s
+189/468 Minneapolis_11072017_Ward13CityCouncil....1s
+190/468 Minneapolis_11072017_Ward1CityCouncil....1s
+191/468 Minneapolis_11072017_Ward2CityCouncil....1s
+192/468 Minneapolis_11072017_Ward3CityCouncil....1s
+193/468 Minneapolis_11072017_Ward4CityCouncil....1s
+194/468 Minneapolis_11072017_Ward5CityCouncil....0s
+195/468 Minneapolis_11072017_Ward6CityCouncil....1s
+196/468 Minneapolis_11072017_Ward7CityCouncil....1s
+197/468 Minneapolis_11072017_Ward8CityCouncil....1s
+198/468 Minneapolis_11072017_Ward9CityCouncil....1s
+199/468 Minneapolis_11072023_CityCouncilWard10....1s
+200/468 Minneapolis_11072023_CityCouncilWard12....1s
+201/468 Minneapolis_11072023_CityCouncilWard13....1s
+202/468 Minneapolis_11072023_CityCouncilWard4....0s
+203/468 Minneapolis_11072023_CityCouncilWard5....0s
+204/468 Minneapolis_11072023_CityCouncilWard7....1s
+205/468 Minneapolis_11072023_CityCouncilWard8....1s
+206/468 Minnetonka_11022021_CityCouncilAtLargeSeatA....3s
+207/468 Minnetonka_11022021_CityCouncilAtLargeSeatB....3s
+208/468 Minnetonka_11022021_Mayor....3s
+209/468 Minnetonka_11072023_CityCouncilWard1....0s
+210/468 Minnetonka_11072023_CityCouncilWard3....0s
+211/468 Minnetonka_11072023_CityCouncilWard4....0s
+212/468 Moab_11022021_CityCouncil....1s
+213/468 NewYorkCity_06222021_CONCouncilMember19thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+15s
+214/468 NewYorkCity_06222021_DEMBoroughPresidentBronx....29s
+215/468 NewYorkCity_06222021_DEMBoroughPresidentKings....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+103s
+216/468 NewYorkCity_06222021_DEMBoroughPresidentNewYork....72s
+217/468 NewYorkCity_06222021_DEMBoroughPresidentQueens....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+33s
+218/468 NewYorkCity_06222021_DEMBoroughPresidentRichmond....10s
+219/468 NewYorkCity_06222021_DEMComptrollerCitywide....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+311s
+220/468 NewYorkCity_06222021_DEMCouncilMember10thCouncilDistrict....27s
+221/468 NewYorkCity_06222021_DEMCouncilMember11thCouncilDistrict....15s
+222/468 NewYorkCity_06222021_DEMCouncilMember12thCouncilDistrict....11s
+223/468 NewYorkCity_06222021_DEMCouncilMember13thCouncilDistrict....11s
+224/468 NewYorkCity_06222021_DEMCouncilMember14thCouncilDistrict....11s
+225/468 NewYorkCity_06222021_DEMCouncilMember15thCouncilDistrict....14s
+226/468 NewYorkCity_06222021_DEMCouncilMember16thCouncilDistrict....11s
+227/468 NewYorkCity_06222021_DEMCouncilMember17thCouncilDistrict....10s
+228/468 NewYorkCity_06222021_DEMCouncilMember18thCouncilDistrict....6s
+229/468 NewYorkCity_06222021_DEMCouncilMember19thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+22s
+230/468 NewYorkCity_06222021_DEMCouncilMember1stCouncilDistrict....28s
+231/468 NewYorkCity_06222021_DEMCouncilMember20thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+24s
+232/468 NewYorkCity_06222021_DEMCouncilMember21stCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+22s
+233/468 NewYorkCity_06222021_DEMCouncilMember22ndCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+30s
+234/468 NewYorkCity_06222021_DEMCouncilMember23rdCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+16s
+235/468 NewYorkCity_06222021_DEMCouncilMember24thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+15s
+236/468 NewYorkCity_06222021_DEMCouncilMember25thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+23s
+237/468 NewYorkCity_06222021_DEMCouncilMember26thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+27s
+238/468 NewYorkCity_06222021_DEMCouncilMember27thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+31s
+239/468 NewYorkCity_06222021_DEMCouncilMember28thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+21s
+240/468 NewYorkCity_06222021_DEMCouncilMember29thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+29s
+241/468 NewYorkCity_06222021_DEMCouncilMember2ndCouncilDistrict....20s
+242/468 NewYorkCity_06222021_DEMCouncilMember30thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+21s
+243/468 NewYorkCity_06222021_DEMCouncilMember31stCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+22s
+244/468 NewYorkCity_06222021_DEMCouncilMember32ndCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+23s
+245/468 NewYorkCity_06222021_DEMCouncilMember33rdCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+31s
+246/468 NewYorkCity_06222021_DEMCouncilMember34thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+47s
+247/468 NewYorkCity_06222021_DEMCouncilMember35thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+34s
+248/468 NewYorkCity_06222021_DEMCouncilMember36thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+32s
+249/468 NewYorkCity_06222021_DEMCouncilMember37thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+30s
+250/468 NewYorkCity_06222021_DEMCouncilMember38thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+33s
+251/468 NewYorkCity_06222021_DEMCouncilMember39thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+36s
+252/468 NewYorkCity_06222021_DEMCouncilMember3rdCouncilDistrict....27s
+253/468 NewYorkCity_06222021_DEMCouncilMember40thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+35s
+254/468 NewYorkCity_06222021_DEMCouncilMember41stCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+27s
+255/468 NewYorkCity_06222021_DEMCouncilMember42ndCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+31s
+256/468 NewYorkCity_06222021_DEMCouncilMember45thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+26s
+257/468 NewYorkCity_06222021_DEMCouncilMember46thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+33s
+258/468 NewYorkCity_06222021_DEMCouncilMember47thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+29s
+259/468 NewYorkCity_06222021_DEMCouncilMember48thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+28s
+260/468 NewYorkCity_06222021_DEMCouncilMember49thCouncilDistrict....8s
+261/468 NewYorkCity_06222021_DEMCouncilMember5thCouncilDistrict....28s
+262/468 NewYorkCity_06222021_DEMCouncilMember6thCouncilDistrict....25s
+263/468 NewYorkCity_06222021_DEMCouncilMember7thCouncilDistrict....29s
+264/468 NewYorkCity_06222021_DEMCouncilMember8thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+32s
+265/468 NewYorkCity_06222021_DEMCouncilMember9thCouncilDistrict....33s
+266/468 NewYorkCity_06222021_DEMMayorCitywide....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+445s
+267/468 NewYorkCity_06222021_DEMPublicAdvocateCitywide....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+122s
+268/468 NewYorkCity_06222021_REPBoroughPresidentQueens....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+17s
+269/468 NewYorkCity_06222021_REPBoroughPresidentRichmond....4s
+270/468 NewYorkCity_06222021_REPCouncilMember15thCouncilDistrict....9s
+271/468 NewYorkCity_06222021_REPCouncilMember19thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+14s
+272/468 NewYorkCity_06222021_REPCouncilMember23rdCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+14s
+273/468 NewYorkCity_06222021_REPCouncilMember24thCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+14s
+274/468 NewYorkCity_06222021_REPCouncilMember32ndCouncilDistrict....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+15s
+275/468 NewYorkCity_06222021_REPCouncilMember50thCouncilDistrict....3s
+276/468 NewYorkCity_06222021_REPMayorCitywide....C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\parsers.py:59: DtypeWarning: Columns (1) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(cvr_path, encoding="utf8")
+48s
+277/468 Oakland_11022010_CityAuditor....34s
+278/468 Oakland_11022010_CityCouncilDistrict2....5s
+279/468 Oakland_11022010_CityCouncilDistrict4....9s
+280/468 Oakland_11022010_CityCouncilDistrict6....5s
+281/468 Oakland_11022010_Mayor....49s
+282/468 Oakland_11022010_SchoolDirectorDistrict2....4s
+283/468 Oakland_11022010_SchoolDirectorDistrict4....7s
+284/468 Oakland_11022010_SchoolDirectorDistrict6....4s
+285/468 Oakland_11032020_CityAttorneyOaklandRCV....61s
+286/468 Oakland_11032020_MemberCityCouncilAtLargeOaklandRCV....67s
+287/468 Oakland_11032020_MemberCityCouncilDist1OaklandRCV....12s
+288/468 Oakland_11032020_MemberCityCouncilDist3OaklandRCV....13s
+289/468 Oakland_11032020_MemberCityCouncilDist5OaklandRCV....6s
+290/468 Oakland_11032020_MemberCityCouncilDist7OaklandRCV....8s
+291/468 Oakland_11032020_SchoolDirectorDist1OaklandRCV....14s
+292/468 Oakland_11032020_SchoolDirectorDist3OaklandRCV....13s
+293/468 Oakland_11032020_SchoolDirectorDist5OaklandRCV....6s
+294/468 Oakland_11032020_SchoolDirectorDist7OaklandRCV....4s
+295/468 Oakland_11042014_CityAuditor....22s
+296/468 Oakland_11042014_CityCouncilDistrict2....4s
+297/468 Oakland_11042014_CityCouncilDistrict4....5s
+298/468 Oakland_11042014_CityCouncilDistrict6....4s
+299/468 Oakland_11042014_Mayor....40s
+300/468 Oakland_11042014_SchoolDirectorDistrict2....4s
+301/468 Oakland_11042014_SchoolDirectorDistrict4....6s
+302/468 Oakland_11042014_SchoolDirectorDistrict6....3s
+303/468 Oakland_11062012_CityAttorney....34s
+304/468 Oakland_11062012_CityCouncilAtLarge....28s
+305/468 Oakland_11062012_CityCouncilDistrict1....5s
+306/468 Oakland_11062012_CityCouncilDistrict3....4s
+307/468 Oakland_11062012_CityCouncilDistrict5....2s
+308/468 Oakland_11062012_CityCouncilDistrict7....2s
+309/468 Oakland_11062012_SchoolDirectorDistrict1....4s
+310/468 Oakland_11062012_SchoolDirectorDistrict3....3s
+311/468 Oakland_11062012_SchoolDirectorDistrict5....2s
+312/468 Oakland_11062012_SchoolDirectorDistrict7....2s
+313/468 Oakland_11062018_CityAuditor....18s
+314/468 Oakland_11062018_CityCouncilDistrict2....3s
+315/468 Oakland_11062018_CityCouncilDistrict4....4s
+316/468 Oakland_11062018_CityCouncilDistrict6....3s
+317/468 Oakland_11062018_Mayor....20s
+318/468 Oakland_11062018_SchoolDirectorDistrict2....3s
+319/468 Oakland_11062018_SchoolDirectorDistrict4....3s
+320/468 Oakland_11062018_SchoolDirectorDistrict6....2s
+321/468 Oakland_11082016_CityAttorney....19s
+322/468 Oakland_11082016_CityCouncilDistrict1....4s
+323/468 Oakland_11082016_CityCouncilDistrict3....3s
+324/468 Oakland_11082016_CityCouncilDistrict5....2s
+325/468 Oakland_11082016_CityCouncilDistrict7....2s
+326/468 Oakland_11082016_CouncilAtLrg....27s
+327/468 Oakland_11082016_SchoolDirectorDistrict1....4s
+328/468 Oakland_11082016_SchoolDirectorDistrict3....4s
+329/468 Oakland_11082016_SchoolDirectorDistrict5....2s
+330/468 Oakland_11082016_SchoolDirectorDistrict7....2s
+331/468 Oakland_11082022_CityAuditor....27s
+332/468 Oakland_11082022_CityCouncilmemberDistrict4....9s
+333/468 Oakland_11082022_CityCouncilmemberDistrict6....5s
+334/468 Oakland_11082022_Mayor....54s
+335/468 Oakland_11082022_Schoolboarddistrict2....6s
+336/468 Oakland_11082022_Schoolboarddistrict4....9s
+337/468 Oakland_11082022_Schoolboarddistrict6....5s
+338/468 Payson_11052019_CityCouncil....0s
+339/468 Payson_11052019_CityCouncil_tab1....ERROR
+Traceback (most recent call last):
+  File "C:\w\rcv-analysis\ops\election_stats\election_stats.py", line 97, in parse_election_stats
+    election = SingleWinner(
+               ^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\variants.py", line 57, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\base.py", line 280, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 333, in __init__
+    validated_cvr = self._validate_cvr(parsed_cvr)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 386, in _validate_cvr
+    raise RuntimeError("parsed ranks list is empty.")
+RuntimeError: parsed ranks list is empty.
+
+340/468 Payson_11052019_CityCouncil_tab2....ERROR
+Traceback (most recent call last):
+  File "C:\w\rcv-analysis\ops\election_stats\election_stats.py", line 97, in parse_election_stats
+    election = SingleWinner(
+               ^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\variants.py", line 57, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\base.py", line 280, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 333, in __init__
+    validated_cvr = self._validate_cvr(parsed_cvr)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 386, in _validate_cvr
+    raise RuntimeError("parsed ranks list is empty.")
+RuntimeError: parsed ranks list is empty.
+
+341/468 Payson_11052019_CityCouncil_tab3....ERROR
+Traceback (most recent call last):
+  File "C:\w\rcv-analysis\ops\election_stats\election_stats.py", line 97, in parse_election_stats
+    election = SingleWinner(
+               ^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\variants.py", line 57, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\base.py", line 280, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 333, in __init__
+    validated_cvr = self._validate_cvr(parsed_cvr)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 386, in _validate_cvr
+    raise RuntimeError("parsed ranks list is empty.")
+RuntimeError: parsed ranks list is empty.
+
+342/468 PierceCounty_11032009_CountyAuditor....37s
+343/468 PierceCounty_11042008_CountyAssessorTreasurer....89s
+344/468 PierceCounty_11042008_CountyCouncilDistrict2....11s
+345/468 PierceCounty_11042008_CountyExecutiveMember....80s
+346/468 Portland_06082021_charter_commission_at_large....5s
+347/468 Portland_06142022_SchoolboardAL-1....2s
+348/468 Portland_06142022_SchoolboardAL....6s
+349/468 Portland_06142022_Schoolboarddistrict5-1....1s
+350/468 Portland_06142022_Schoolboarddistrict5....1s
+351/468 Portland_11082022_SchoolBoardDistrict3....2s
+352/468 SanFrancisco_06052018_BoardofSupervisorsDistrict8....9s
+353/468 SanFrancisco_06052018_Mayor....77s
+354/468 SanFrancisco_11022004_BoardofSupervisorsDistrict11....4s
+355/468 SanFrancisco_11022004_BoardofSupervisorsDistrict2....2s
+356/468 SanFrancisco_11022004_BoardofSupervisorsDistrict3....1s
+357/468 SanFrancisco_11022004_BoardofSupervisorsDistrict5....4s
+358/468 SanFrancisco_11022004_BoardofSupervisorsDistrict7....2s
+359/468 SanFrancisco_11022004_BoardofSupervisorsDistrict9....1s
+360/468 SanFrancisco_11022010_BoardofSupervisorsDistrict10....10s
+361/468 SanFrancisco_11022010_BoardofSupervisorsDistrict2....9s
+362/468 SanFrancisco_11022010_BoardofSupervisorsDistrict6....11s
+363/468 SanFrancisco_11022010_BoardofSupervisorsDistrict8....11s
+364/468 SanFrancisco_11032015_BoardofSupervisorsDistrict3....4s
+365/468 SanFrancisco_11032015_Mayor....51s
+366/468 SanFrancisco_11032015_Sheriff....51s
+367/468 SanFrancisco_11032020_BOARDOFSUPERVISORSDISTRICT1....14s
+368/468 SanFrancisco_11032020_BOARDOFSUPERVISORSDISTRICT11....11s
+369/468 SanFrancisco_11032020_BOARDOFSUPERVISORSDISTRICT3....9s
+370/468 SanFrancisco_11032020_BOARDOFSUPERVISORSDISTRICT5....12s
+371/468 SanFrancisco_11032020_BOARDOFSUPERVISORSDISTRICT7....17s
+372/468 SanFrancisco_11032020_BOARDOFSUPERVISORSDISTRICT9....10s
+373/468 SanFrancisco_11042008_BoardofSupervisorsDistrict1....12s
+374/468 SanFrancisco_11042008_BoardofSupervisorsDistrict11....11s
+375/468 SanFrancisco_11042008_BoardofSupervisorsDistrict3....11s
+376/468 SanFrancisco_11042008_BoardofSupervisorsDistrict4....8s
+377/468 SanFrancisco_11042008_BoardofSupervisorsDistrict5....11s
+378/468 SanFrancisco_11042008_BoardofSupervisorsDistrict7....9s
+379/468 SanFrancisco_11042008_BoardofSupervisorsDistrict9....9s
+380/468 SanFrancisco_11042014_BoardofSupervisorsDistrict10....5s
+381/468 SanFrancisco_11052004_BoardofSupervisorsDistrict1....2s
+382/468 SanFrancisco_11052019_CityAttorney....50s
+383/468 SanFrancisco_11052019_DistrictAttorney....61s
+384/468 SanFrancisco_11052019_Mayor....63s
+385/468 SanFrancisco_11052019_MemberBoardofSupervisorsDistrict5....8s
+386/468 SanFrancisco_11052019_PublicDefender....49s
+387/468 SanFrancisco_11052019_Sheriff....48s
+388/468 SanFrancisco_11052019_Treasurer....52s
+389/468 SanFrancisco_11062007_Mayor....9s
+390/468 SanFrancisco_11062012_BoardofSupervisorsDistrict5....14s
+391/468 SanFrancisco_11062012_BoardofSupervisorsDistrict7....14s
+392/468 SanFrancisco_11062018_AssessorRecorder....96s
+393/468 SanFrancisco_11062018_BoardofSupervisorsDistrict10....8s
+394/468 SanFrancisco_11062018_BoardofSupervisorsDistrict2....11s
+395/468 SanFrancisco_11062018_BoardofSupervisorsDistrict4....9s
+396/468 SanFrancisco_11062018_BoardofSupervisorsDistrict6....3s
+397/468 SanFrancisco_11062018_BoardofSupervisorsDistrict8....9s
+398/468 SanFrancisco_11062018_PublicDefender....90s
+399/468 SanFrancisco_11072006_BoardofSupervisorsDistrict10....2s
+400/468 SanFrancisco_11072006_BoardofSupervisorsDistrict2....2s
+401/468 SanFrancisco_11072006_BoardofSupervisorsDistrict4....1s
+402/468 SanFrancisco_11072006_BoardofSupervisorsDistrict6....1s
+403/468 SanFrancisco_11072006_BoardofSupervisorsDistrict8....2s
+404/468 SanFrancisco_11082005_AssessorRecorder....13s
+405/468 SanFrancisco_11082005_Treasurer....13s
+406/468 SanFrancisco_11082011_DistrictAttorney....57s
+407/468 SanFrancisco_11082011_Mayor....87s
+408/468 SanFrancisco_11082011_Sheriff....56s
+409/468 SanFrancisco_11082016_BoardofSupervisorsDistrict1....12s
+410/468 SanFrancisco_11082016_BoardofSupervisorsDistrict11....8s
+411/468 SanFrancisco_11082016_BoardofSupervisorsDistrict3....8s
+412/468 SanFrancisco_11082016_BoardofSupervisorsDistrict5....12s
+413/468 SanFrancisco_11082016_BoardofSupervisorsDistrict7....12s
+414/468 SanFrancisco_11082016_BoardofSupervisorsDistrict9....9s
+415/468 SanFrancisco_11082022_AssessorRecorder....80s
+416/468 SanFrancisco_11082022_BoardofSupervisorsD10....6s
+417/468 SanFrancisco_11082022_BoardofSupervisorsD2....8s
+418/468 SanFrancisco_11082022_BoardofSupervisorsD4....8s
+419/468 SanFrancisco_11082022_BoardofSupervisorsD6....5s
+420/468 SanFrancisco_11082022_BoardofSupervisorsD8....11s
+421/468 SanFrancisco_11082022_DistrictAttorney....91s
+422/468 SanFrancisco_11082022_PublicDefender....83s
+423/468 SanLeandro_11022010_CountyCouncilDistrict1....6s
+424/468 SanLeandro_11022010_CountyCouncilDistrict3....6s
+425/468 SanLeandro_11022010_CountyCouncilDistrict5....6s
+426/468 SanLeandro_11022010_Mayor....8s
+427/468 SanLeandro_11032020_MemberCityCouncilDist2SanLeandroRCV....12s
+428/468 SanLeandro_11032020_MemberCityCouncilDist4SanLeandroRCV....12s
+429/468 SanLeandro_11032020_MemberCityCouncilDist6SanLeandroRCV....11s
+430/468 SanLeandro_11042014_CountyCouncilDistrict1....5s
+431/468 SanLeandro_11042014_CountyCouncilDistrict3....4s
+432/468 SanLeandro_11042014_CountyCouncilDistrict5....4s
+433/468 SanLeandro_11042014_Mayor....5s
+434/468 SanLeandro_11062012_CountyCouncilDistrict2....8s
+435/468 SanLeandro_11062012_CountyCouncilDistrict4....8s
+436/468 SanLeandro_11062012_CountyCouncilDistrict6....7s
+437/468 SanLeandro_11062018_CountyCouncilDistrict1....7s
+438/468 SanLeandro_11062018_CountyCouncilDistrict3....7s
+439/468 SanLeandro_11062018_CountyCouncilDistrict5....8s
+440/468 SanLeandro_11062018_Mayor....8s
+441/468 SanLeandro_11082016_CountyCouncilDistrict2....8s
+442/468 SanLeandro_11082016_CountyCouncilDistrict4....9s
+443/468 SanLeandro_11082016_CountyCouncilDistrict6....8s
+444/468 SantaFe_03062018_CityCouncilDistrict2....1s
+445/468 SantaFe_03062018_CityCouncilDistrict4....0s
+446/468 SantaFe_03062018_Mayor....1s
+447/468 Springville_11022021_CityCouncil2yr....2s
+448/468 Springville_11022021_CityCouncil4yr....3s
+449/468 Springville_11022021_Mayor....2s
+450/468 StLouisPark_11022021_CityCouncilWard1....0s
+451/468 StLouisPark_11022021_CityCouncilWard2....0s
+452/468 StLouisPark_11022021_CityCouncilWard3....0s
+453/468 StLouisPark_11022021_CityCouncilWard4....0s
+454/468 TakomaPark_11082022_CityCouncilWard1....0s
+455/468 TakomaPark_11082022_CityCouncilWard2....0s
+456/468 TakomaPark_11082022_CityCouncilWard3....0s
+457/468 TakomaPark_11082022_CityCouncilWard4....0s
+458/468 TakomaPark_11082022_CityCouncilWard5....ERROR
+Traceback (most recent call last):
+  File "C:\w\rcv-analysis\ops\election_stats\election_stats.py", line 117, in parse_election_stats
+    competitive_ratio = int(top3_tally[bronze])/int(top3_tally[winner])
+                            ~~~~~~~~~~^^^^^^^^
+KeyError: 'writein'
+
+459/468 TakomaPark_11082022_CityCouncilWard6....0s
+460/468 TakomaPark_11082022_Mayor....1s
+461/468 Vineyard_11022021_CityCouncil....1s
+462/468 Vineyard_11022021_Mayor....0s
+463/468 Vineyard_11052019_CityCouncil....0s
+464/468 Vineyard_11052019_CityCouncil_tab1....ERROR
+Traceback (most recent call last):
+  File "C:\w\rcv-analysis\ops\election_stats\election_stats.py", line 97, in parse_election_stats
+    election = SingleWinner(
+               ^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\variants.py", line 57, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\base.py", line 280, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 333, in __init__
+    validated_cvr = self._validate_cvr(parsed_cvr)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 386, in _validate_cvr
+    raise RuntimeError("parsed ranks list is empty.")
+RuntimeError: parsed ranks list is empty.
+
+465/468 Vineyard_11052019_CityCouncil_tab2....ERROR
+Traceback (most recent call last):
+  File "C:\w\rcv-analysis\ops\election_stats\election_stats.py", line 97, in parse_election_stats
+    election = SingleWinner(
+               ^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\variants.py", line 57, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\rcv\base.py", line 280, in __init__
+    super().__init__(
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 333, in __init__
+    validated_cvr = self._validate_cvr(parsed_cvr)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apc19\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\rcv_cruncher\cvr\base.py", line 386, in _validate_cvr
+    raise RuntimeError("parsed ranks list is empty.")
+RuntimeError: parsed ranks list is empty.
+
+466/468 WoodlandHills_11022021_CityCouncil....0s
+467/468 WoodlandHills_11022021_Mayor....0s
+468/468 Wyoming_04172020_PRESIDENTOFTHEUNITEDSTATES....5s
+Total Time: 30998s

@@ -34,7 +34,7 @@ def get_args():
     return parser.parse_args()
 
 
-def clean_cvrs(cvrs, valid_precincts):
+def clean_precincts(cvrs, valid_precincts):
     log('cleaning cvrs...')
 
     for cvr in cvrs:
@@ -91,20 +91,20 @@ if __name__ == '__main__':
     cvr_files = os.listdir('cvr/')
     # cvr_files = ['Moab_11022021_CityCouncil.csv']
 
-    demographics = {}
-    with open(f'ops/precinct_stats/demographics/{args.census_year}.csv') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            demographics[row['precinct']] = row
-
     start = time.time()
 
     if args.op == 'election-stats':
-        clean_cvrs(cvr_files, demographics.keys())
         data = parse_election_stats(cvr_files, args.verbose)
 
     if args.op == 'precinct-stats':
-        clean_cvrs(cvr_files, demographics.keys())
+        # TODO: I can probably move demographics and clean_precincts into parse_precinct_stats
+        demographics = {}
+        with open(f'ops/precinct_stats/demographics/{args.census_year}.csv') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                demographics[row['precinct']] = row
+
+        clean_precincts(cvr_files, demographics.keys())
         data = parse_precinct_stats(cvr_files, args.verbose, args.census_year, demographics)
 
     if args.op == 'block-to-precinct':
