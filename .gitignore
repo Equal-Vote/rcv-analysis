@@ -3,3 +3,4 @@ output.csv
 output.kml
 helper/*
 **__pycache__**
+session.json

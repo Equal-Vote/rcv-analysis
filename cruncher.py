@@ -8,6 +8,7 @@ import warnings
 import pandas
 
 from ops.election_stats.election_stats import parse_election_stats
+from ops.cvr_to_csv.cvr_to_csv import parse_cvr
 from ops.precinct_stats.precinct_stats import parse_precinct_stats
 from ops.block_to_precinct.block_to_precinct import parse_block_to_precinct
 from ops.precincts_to_kml.precincts_to_kml import precincts_to_kml
@@ -20,7 +21,7 @@ demographics = {}
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'precincts-to-kml', 'block-to-precinct',])
+    parser.add_argument('op', choices=['election-stats', 'precinct-stats', 'precincts-to-kml', 'block-to-precinct','cvr-to-csv'])
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
     parser.add_argument('-y', '--census-year', default='2020')
@@ -31,6 +32,8 @@ def get_args():
     parser.add_argument('-p', '--precincts-file')
     parser.add_argument('-r', '--apply-race-colors', action='store_true')
     parser.add_argument('-z', '--z-axis')
+    # cvr to csv
+    parser.add_argument('-c', '--raw-cvr')
     return parser.parse_args()
 
 
@@ -110,12 +113,15 @@ if __name__ == '__main__':
     if args.op == 'block-to-precinct':
         data = parse_block_to_precinct(args.block_file, args.mapper_file, args.output, args.census_year)
 
+    if args.op == 'cvr-to-csv':
+        data = parse_cvr(args.raw_cvr)
+
     if args.op == 'precincts-to-kml':
         data = precincts_to_kml(args.precincts_file, args.output, args.z_axis, args.apply_race_colors)
 
     log(f'Total Time: {round(time.time()-start)}s')
 
-    if args.op in ('election-stats', 'precinct-stats',):
+    if args.op in ('election-stats', 'precinct-stats', 'cvr-to-csv'):
         if args.output:
             generate_csv(args.output)
         else:

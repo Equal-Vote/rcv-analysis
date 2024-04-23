@@ -32,6 +32,7 @@ data = defaultdict( lambda: {
     'includes_skipped_ranking': 0,
     'total_irregular': 0,
     'total_ballots': 0,
+    'total_undervote': 0,
     'total_pretally_exhausted': 0,
     'total_posttally_exhausted': 0,
     'total_posttally_exhausted_by_overvote': 0,
@@ -108,6 +109,7 @@ def parse_precinct_stats(file_names, verbose, census_year, demographics):
                     'includes_overvote_ranking',
                     'includes_skipped_ranking',
                     'total_irregular',
+                    'total_undervote',
                     'total_ballots',
                     'total_pretally_exhausted',
                     'total_posttally_exhausted',
@@ -120,7 +122,7 @@ def parse_precinct_stats(file_names, verbose, census_year, demographics):
                     'total_posttally_exhausted_by_duplicate_rankings',
                 ]:
                     data[data_key][key] = data[data_key][key] + stats[key][i]
-
+                
                 data[data_key].update(demographics[precinct])
 
             log(f'{round(time.time()-start)}s')
