@@ -117,7 +117,7 @@ if __name__ == '__main__':
         data = parse_cvr(args.raw_cvr)
 
     if args.op == 'precincts-to-kml':
-        data = precincts_to_kml(args.precincts_file, args.output, args.z_axis, args.apply_race_colors)
+        data = precincts_to_kml(args.precincts_file, args.output, args.z_axis, args.apply_race_colors, args.census_year)
 
     log(f'Total Time: {round(time.time()-start)}s')
 

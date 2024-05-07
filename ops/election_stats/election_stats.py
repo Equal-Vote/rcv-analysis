@@ -34,6 +34,7 @@ data = defaultdict( lambda: {
     'total_ballots_with_rankings_stalled_after_runner_up': 0,
     'total_ballots_with_fav_eliminated_and_second_not_tallied': 0,
     'total_ballots_with_elimination_and_next_not_tallied': 0,
+    'min_elimination_margin': 0,
     # These are set based on rcv cruncher
     'n_candidates': '',
     'rank_limit': '',
@@ -105,8 +106,26 @@ def parse_election_stats(file_names, verbose):
             stats = election.get_stats()[0].to_dict()
             stats = {k:v[0] for k,v in stats.items()}
 
-            # Compute competitive ratio
+            # Compute competitive ratio & min_elimination_margin
             rounds = election.get_round_by_round_dict()
+
+            mm = 999999 # I can't use min_elimination_margin for some reason?
+            # I can't use round since that conflicts with the python function
+            for _round in rounds['results']:
+                elect_sum = sum(int(_round['tally'][r['elected']]) for r in _round['tallyResults'] if 'elected' in r)
+                elim_sum = sum(int(_round['tally'][r['eliminated']]) for r in _round['tallyResults'] if 'eliminated' in r)
+                eliminated_candidates = [r['eliminated'] for r in _round['tallyResults'] if 'eliminated' in r]
+                if _round['round'] == len(rounds['results']):
+                    mm = min(mm, elect_sum-elim_sum)
+                else:
+                    lowest_remaining_tally = 999999999999
+                    for (candidate, tally) in _round['tally'].items():
+                        if candidate in eliminated_candidates:
+                            continue
+                        if int(tally) < lowest_remaining_tally:
+                            lowest_remaining_tally = int(tally)
+                    mm = lowest_remaining_tally
+
             if len(rounds['results']) < 2:
                 competitive_ratio = 0
             else:
@@ -120,6 +139,7 @@ def parse_election_stats(file_names, verbose):
             data[election_name].update({
                 'election': election_name,
                 'competitive_ratio': competitive_ratio,
+                'min_elimination_margin': mm,
 
                 'n_candidates': stats['n_candidates'],
                 'come_from_behind': stats['come_from_behind'],
@@ -201,7 +221,7 @@ def parse_election_stats(file_names, verbose):
                 stall_after_winner = len(b_stack)-1 if len(b_stack) > 0 and b_stack[-1] == e_stack[0] else 0
                 stall_after_runner_up =len(b_stack)-1 if len(b_stack) > 0 and b_stack[-1] == e_stack[-1] else 0
 
-                if stall_after_runner_up > 0 and len(b_stack) == rankings_used:
+                if not first_ballot_elimination_completed and stall_after_runner_up > 0 and len(b_stack) == rankings_used:
                     fav_eliminated_and_second_not_tallied = True
 
                 return {

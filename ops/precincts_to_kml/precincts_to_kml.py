@@ -7,10 +7,16 @@ import xmltodict
 
 
 def pre(mark):
+    p = ''
     if 'Data' in mark['ExtendedData']:
-        return [d['value'] for d in mark['ExtendedData']['Data'] if d['@name'] == 'Precinct_ID'][0]
+        p = [d['value'] for d in mark['ExtendedData']['Data'] if d['@name'] == 'Precinct_ID'][0]
     else:
-        return [d['#text'] for d in mark['ExtendedData']['SchemaData']['SimpleData'] if d['@name'] == 'Precinct_ID'][0]
+        p = [d['#text'] for d in mark['ExtendedData']['SchemaData']['SimpleData'] if d['@name'] == 'Precinct_ID'][0]
+    
+    if len(p) == 7 and p[0] == '9':
+        p = p[1:]
+
+    return p
 
 
 def appendData(mark, key, value):
@@ -39,7 +45,7 @@ def lerpColor(a, b='ffffffff', t=0):
 
     def parseColor(h):
         return {
-            'a': toNum(h[:2]),
+            'a': 255, # toNum(h[:2]),
             'b': toNum(h[2:4]),
             'g': toNum(h[4:6]),
             'r': toNum(h[6:]),
@@ -60,19 +66,23 @@ def lerpColor(a, b='ffffffff', t=0):
 
 
 RACE_COLORS = {
-    'White': [ 'ffcac3ff', 'ff7b68ff'],
-    'Black or African American': [ 'ffa1c8ff', 'ff167dff'],
-    'American Indian and Alaska Native': [ 'ffeaeaea', 'ffcccccc'],
-    'Asian': [ 'ffe8f8ed', 'ffc6ffcf'],
-    'Hispanic': [ 'fffff4ce', 'ffffe392'],
-    # these colors were defined in my reference graphic, I'll add them as needed
+    'White': ['ccf48642', 'ccf48642'], # [ 'ffcac3ff', 'ff7b68ff'], 
+    'Black or African American': [ 'cc3543ea', 'cc3543ea'], # [ 'ffa1c8ff', 'ff167dff'],
+    'American Indian and Alaska Native': [ 'cceaeaea', 'cccccccc'], 
+    'Asian': ['cc538a43', 'cc538a43'], # [ 'ffe8f8ed', 'ffc6ffcf'],
+    'Hispanic': ['cc04bcfb', 'cc04bcfb'], # [ 'fffff4ce', 'ffffe392'], 
+    # these colors weren't defined in my reference graphic, I'll add them as needed
     'Native Hawaiian and Other Pacific Islander': [ 'ff000000', 'ffffffff'],
     'Some Other Race': [ 'ff000000', 'ffffffff'],
     'Two or more races':[ 'ff000000', 'ffffffff']
 }
 
+def lerp(a, b, t):
+    return a*(1-t) + b*t
+
 
 def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
+    min_height = 200;
     max_height = 5000;
 
     # Removing any precincts that don't line up with the data (I should probably clean this up)
@@ -89,35 +99,47 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
         # print('KML ', sorted([pre(mark) for mark in root['Placemark']]))
         # print()
         # print('Data', sorted(list(precincts.keys())))
+        print('MISSING PRECINCTS:\n', '\n'.join(set(precincts.keys()).difference(set(pre(m) for m in root['Placemark']))) )
         print(f"Warning! KML only has {len(root['Placemark'])} / {len(precincts)} precincts")
         #raise Exception(f"Mismatch! KML only has {len(root['Placemark'])} / {len(precincts)} precincts")
 
     for mark in root['Placemark']:
         if 'Polygon' not in mark:
             continue
-        error = (float(precincts[pre(mark)][key]) / float(precincts[pre(mark)]['total_ballots']))
+
+        key_sum = 0
+        total_votes = 0
+        for item in precincts[pre(mark)]:
+            key_sum = key_sum + float(item[key])
+            total_votes = total_votes + (float(item['total_ballots']) - float(item['total_undervote']))
+
+        error = key_sum / total_votes
+
         # Add label
-        appendData(mark, f'{key.replace('total_', '')}_percent', f'{round(error*100, 2)}%')
+        appendData(mark, f'{key.replace('total_', '')}_percent', f'{round(error*100, 2)}')
         mark['name'] = f'{round(error*100, 2)}%'
-        error = error / max_value
+        # error = error / max_value
         # Style
         if apply_race_colors:
-            race = sorted(list(RACE_COLORS.keys()), key=lambda race: float(precincts[pre(mark)][race]))[-1]
+            race = sorted(list(RACE_COLORS.keys()), key=lambda race: float(precincts[pre(mark)][0][race]))[-1]
 
-            t = float(precincts[pre(mark)][race]) / float(precincts[pre(mark)]['Precinct Pop.'])
+            t = float(precincts[pre(mark)][0][race]) / float(precincts[pre(mark)][0]['Precinct Pop.'])
             t = (t - .3) / (.5 - .3)# inv lerp 30% - 50%
 
             color = lerpColor(RACE_COLORS[race][0], RACE_COLORS[race][1], t)
         else:
             f = min(max_value,error)/max_value
-            color = lerpColor('ffffffff', 'ff0000ff', f)
+            color = lerpColor('ccffffff', 'cc0000ff', f)
         mark['Style'] = {
             'LineStyle': {
                 'color': lerpColor(color, 'ff000000', .7),
-                'gx:labelVisibility': '1'
+                'width': 3,
+                # 'colorMode': 'normal',
+                # 'gx:labelVisibility': 1,
             },
             'PolyStyle': {
-                'color': color
+                'color': color,
+                # 'outline': 1
             },
             'IconStyle': {
                 'Icon': {
@@ -128,10 +150,10 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
         }
         # Enable extrusion
         mark['Polygon']['extrude'] = '1'
-        mark['Polygon']['altitudeMode'] = 'relativeToGround'
+        mark['Polygon']['altitudeMode'] = 'absolute'
         # Update coordindates
         ring = mark['Polygon']['outerBoundaryIs']['LinearRing']
-        ring['coordinates'] = ' '.join([f'{c},{max_height * error}' for c in re.split(r'\\n|\s', ring['coordinates'])])
+        ring['coordinates'] = ' '.join([f'{c},{lerp(min_height, max_height, error/max_value)}' for c in re.split(r'\\n|\s', ring['coordinates'])])
         # Add a point
         # https://stackoverflow.com/questions/43112699/line-label-not-displayed-when-using-region-on-kml-file-for-ge#:~:text=This%20is%20a%20bug%20in,the%20location%20of%20the%20point.
         a = 0
@@ -147,16 +169,16 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
             'Polygon': mark['Polygon'],
             'Point': {
                 'extrude': '1',
-                'altitudeMode': 'relativeToGround',
-                'coordinates': f'{a},{b},{(max_height * error)-400}'
+                'altitudeMode': 'absolute',
+                'coordinates': f'{a},{b},{(lerp(min_height, max_height, error/max_value))-200}'
             }
         }
         del mark['Polygon']
 
 
-def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
+def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors, census_year):
     # load base kml
-    with open('ops/precincts_to_kml/kml/alameda_2022.kml') as f:
+    with open(f'ops/precincts_to_kml/kml/alameda_{'2022' if census_year == '2020' else '2018'}.kml') as f:
         text = f.read()
     kml = xmltodict.parse(text)
 
@@ -165,10 +187,12 @@ def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors):
     with open(precincts_file) as f:
         reader = csv.DictReader(f)
         for row in reader:
-            precincts[row['precinct']] = row
+            if row['precinct'] not in precincts:
+                precincts[row['precinct']] = []
+            precincts[row['precinct']].append(row)
     
     # modify
-    m = apply_data_to_kml(precincts, z_axis or 'total_irregular', .5, apply_race_colors, kml)
+    m = apply_data_to_kml(precincts, z_axis or 'total_irregular', .3, apply_race_colors, kml)
 
     # write kml
     with open(output_file, 'w') as f:
