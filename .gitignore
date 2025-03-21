@@ -2,6 +2,6 @@ cvr**/**
 output.csv
 output.kml
 helper/*
-Complete**/**
+RedondoRaw/**
 **__pycache__**
 session.json
