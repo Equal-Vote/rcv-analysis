@@ -2,5 +2,6 @@ cvr**/**
 output.csv
 output.kml
 helper/*
+Complete**/**
 **__pycache__**
 session.json

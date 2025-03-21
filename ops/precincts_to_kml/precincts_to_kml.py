@@ -66,11 +66,11 @@ def lerpColor(a, b='ffffffff', t=0):
 
 
 RACE_COLORS = {
-    'White': ['ccf48642', 'ccf48642'], # [ 'ffcac3ff', 'ff7b68ff'], 
-    'Black or African American': [ 'cc3543ea', 'cc3543ea'], # [ 'ffa1c8ff', 'ff167dff'],
+    'White': ['ffffffff', 'ffb3a22a'],
+    'Black or African American': [ 'ffffffff', 'ff0099ff'], # [ 'ffa1c8ff', 'ff167dff'],
     'American Indian and Alaska Native': [ 'cceaeaea', 'cccccccc'], 
-    'Asian': ['cc538a43', 'cc538a43'], # [ 'ffe8f8ed', 'ffc6ffcf'],
-    'Hispanic': ['cc04bcfb', 'cc04bcfb'], # [ 'fffff4ce', 'ffffe392'], 
+    'Asian': ['ffffffff', 'ff3cb360'], # [ 'ffe8f8ed', 'ffc6ffcf'],
+    'Hispanic': ['ffffffff', 'ff56e1ff'], # [ 'fffff4ce', 'ffffe392'], 
     # these colors weren't defined in my reference graphic, I'll add them as needed
     'Native Hawaiian and Other Pacific Islander': [ 'ff000000', 'ffffffff'],
     'Some Other Race': [ 'ff000000', 'ffffffff'],
@@ -116,15 +116,22 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
         error = key_sum / total_votes
 
         # Add label
-        appendData(mark, f'{key.replace('total_', '')}_percent', f'{round(error*100, 2)}')
-        mark['name'] = f'{round(error*100, 2)}%'
+        appendData(mark, f'{key.replace('total_', '')}_percent', f'{round(error*100)}')
+        mark['name'] = f'{round(error*100)}%'
         # error = error / max_value
         # Style
         if apply_race_colors:
-            race = sorted(list(RACE_COLORS.keys()), key=lambda race: float(precincts[pre(mark)][0][race]))[-1]
+            # race = sorted(list(RACE_COLORS.keys()), key=lambda race: float(precincts[pre(mark)][0][race]))[-1]
+            race = 'Black or African American'
+            # race = 'Hispanic'
+            # race = 'Asian'
+            # race = 'White'
 
             t = float(precincts[pre(mark)][0][race]) / float(precincts[pre(mark)][0]['Precinct Pop.'])
-            t = (t - .3) / (.5 - .3)# inv lerp 30% - 50%
+            # t = (t - .3) / (.5 - .3)# inv lerp 30% - 50%
+            # t = (t - .0) / (.3 - .0)# inv lerp 00% - 30%
+            #t = (t - .2) / (.6 - .2)# inv lerp 20% - 60%
+            t = (t - .0) / (.01 - .0)# inv lerp 00% - 1%
 
             color = lerpColor(RACE_COLORS[race][0], RACE_COLORS[race][1], t)
         else:
@@ -146,6 +153,9 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
                     # 'href': 'https://cdn-icons-png.flaticon.com/512/25/25613.png'
                     'href': 'https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png'
                 }
+            },
+            'LabelStyle': {
+                'scale': 2.2
             }
         }
         # Enable extrusion
@@ -192,7 +202,7 @@ def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors, cen
             precincts[row['precinct']].append(row)
     
     # modify
-    m = apply_data_to_kml(precincts, z_axis or 'total_irregular', .3, apply_race_colors, kml)
+    m = apply_data_to_kml(precincts, z_axis or 'total_irregular', .1, apply_race_colors, kml)
 
     # write kml
     with open(output_file, 'w') as f:

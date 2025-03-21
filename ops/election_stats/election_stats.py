@@ -98,9 +98,9 @@ def parse_election_stats(file_names, verbose):
             election = SingleWinner(
                  parser_func=rank_column_csv,
                  parser_args={'cvr_path': cvr_file},
-                 exhaust_on_duplicate_candidate_marks=False,
+                 exhaust_on_duplicate_candidate_marks=True,
                  exhaust_on_overvote_marks=True,
-                 exhaust_on_N_repeated_skipped_marks=2,
+                 # exhaust_on_N_repeated_skipped_marks=2,
             )
 
             stats = election.get_stats()[0].to_dict()
@@ -111,9 +111,11 @@ def parse_election_stats(file_names, verbose):
 
             mm = 999999 # I can't use min_elimination_margin for some reason?
             # I can't use round since that conflicts with the python function
+            print(rounds)
             for _round in rounds['results']:
                 elect_sum = sum(int(_round['tally'][r['elected']]) for r in _round['tallyResults'] if 'elected' in r)
-                elim_sum = sum(int(_round['tally'][r['eliminated']]) for r in _round['tallyResults'] if 'eliminated' in r)
+                # added .get(,0) since TakomaPark_11082022_CityCouncilWard5 has writein being eliminated with 0 votes
+                elim_sum = sum(int(_round['tally'].get(r['eliminated'], 0)) for r in _round['tallyResults'] if 'eliminated' in r)
                 eliminated_candidates = [r['eliminated'] for r in _round['tallyResults'] if 'eliminated' in r]
                 if _round['round'] == len(rounds['results']):
                     mm = min(mm, elect_sum-elim_sum)
@@ -131,7 +133,8 @@ def parse_election_stats(file_names, verbose):
             else:
                 # TODO: I probably shouldn't assume that the elected will be first
                 winner = rounds['results'][-1]['tallyResults'][0]['elected'] 
-                bronze = rounds['results'][-2]['tallyResults'][0]['eliminated']
+                # using -1 because some elections have rounds where multiple candidates are eliminated and we want to use the strongest candidate among those
+                bronze = rounds['results'][-2]['tallyResults'][-1]['eliminated']
                 top3_tally = rounds['results'][-2]['tally']
                 competitive_ratio = int(top3_tally[bronze])/int(top3_tally[winner])
 
