@@ -111,7 +111,6 @@ def parse_election_stats(file_names, verbose):
 
             mm = 999999 # I can't use min_elimination_margin for some reason?
             # I can't use round since that conflicts with the python function
-            print(rounds)
             for _round in rounds['results']:
                 elect_sum = sum(int(_round['tally'][r['elected']]) for r in _round['tallyResults'] if 'elected' in r)
                 # added .get(,0) since TakomaPark_11082022_CityCouncilWard5 has writein being eliminated with 0 votes

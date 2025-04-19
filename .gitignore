@@ -1,5 +1,6 @@
 cvr**/**
 output.csv
+output*.csv
 output.kml
 helper/*
 RedondoRaw/**
