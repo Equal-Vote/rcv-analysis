@@ -66,7 +66,7 @@ def lerpColor(a, b='ffffffff', t=0):
 
 
 RACE_COLORS = {
-    'White': ['ffffffff', 'ffb3a22a'],
+    'White': ['ff800080', 'ffffffff'], # ['ffffffff', 'ffb3a22a'],
     'Black or African American': [ 'ffffffff', 'ff0099ff'], # [ 'ffa1c8ff', 'ff167dff'],
     'American Indian and Alaska Native': [ 'cceaeaea', 'cccccccc'], 
     'Asian': ['ffffffff', 'ff3cb360'], # [ 'ffe8f8ed', 'ffc6ffcf'],
@@ -117,73 +117,77 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
 
         # Add label
         appendData(mark, f'{key.replace('total_', '')}_percent', f'{round(error*100)}')
-        mark['name'] = f'{round(error*100)}%'
         # error = error / max_value
         # Style
         if apply_race_colors:
             # race = sorted(list(RACE_COLORS.keys()), key=lambda race: float(precincts[pre(mark)][0][race]))[-1]
-            race = 'Black or African American'
+            # race = 'Black or African American'
             # race = 'Hispanic'
             # race = 'Asian'
-            # race = 'White'
+            race = 'White'
 
             t = float(precincts[pre(mark)][0][race]) / float(precincts[pre(mark)][0]['Precinct Pop.'])
+
+            mark['name'] = f'{round((1-t)*100)}%'
+
             # t = (t - .3) / (.5 - .3)# inv lerp 30% - 50%
-            # t = (t - .0) / (.3 - .0)# inv lerp 00% - 30%
-            #t = (t - .2) / (.6 - .2)# inv lerp 20% - 60%
-            t = (t - .0) / (.01 - .0)# inv lerp 00% - 1%
+            t = (t - .0) / (.3 - .0)# inv lerp 00% - 30%
+            # t = (t - .2) / (.9 - .2)# inv lerp 20% - 90%
+            # t = (t - .2) / (1 - .2)# inv lerp 20% - 100%
+            #t = (t - .0) / (.01 - .0)# inv lerp 00% - 1%
 
             color = lerpColor(RACE_COLORS[race][0], RACE_COLORS[race][1], t)
         else:
-            f = min(max_value,error)/max_value
-            color = lerpColor('ccffffff', 'cc0000ff', f)
+            f = min(.22,error)/.22
+            color = lerpColor('ccffffff', 'cc0000ff', min(1, f))
+            mark['name'] = f'{round(error*100)}%'
         mark['Style'] = {
+            'PolyStyle': {
+                'color': color,
+                'outline': '1'
+            },
             'LineStyle': {
-                'color': lerpColor(color, 'ff000000', .7),
+                'color': 'ff000000', #lerpColor(color, 'ff000000', .7),
                 'width': 3,
                 # 'colorMode': 'normal',
                 # 'gx:labelVisibility': 1,
             },
-            'PolyStyle': {
-                'color': color,
-                # 'outline': 1
-            },
-            'IconStyle': {
-                'Icon': {
-                    # 'href': 'https://cdn-icons-png.flaticon.com/512/25/25613.png'
-                    'href': 'https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png'
-                }
-            },
-            'LabelStyle': {
-                'scale': 2.2
-            }
+            # 'IconStyle': {
+            #     'Icon': {
+            #         # 'href': 'https://cdn-icons-png.flaticon.com/512/25/25613.png'
+            #         'href': 'https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png'
+            #     }
+            # },
+            # 'LabelStyle': {
+            #     'scale': 2.2
+            # }
         }
         # Enable extrusion
-        mark['Polygon']['extrude'] = '1'
-        mark['Polygon']['altitudeMode'] = 'absolute'
-        # Update coordindates
-        ring = mark['Polygon']['outerBoundaryIs']['LinearRing']
-        ring['coordinates'] = ' '.join([f'{c},{lerp(min_height, max_height, error/max_value)}' for c in re.split(r'\\n|\s', ring['coordinates'])])
-        # Add a point
-        # https://stackoverflow.com/questions/43112699/line-label-not-displayed-when-using-region-on-kml-file-for-ge#:~:text=This%20is%20a%20bug%20in,the%20location%20of%20the%20point.
-        a = 0
-        b = 0;
-        arr = ring['coordinates'].split(' ')
-        for pair in arr:
-            p = pair.split(',')
-            a = a + float(p[0])
-            b = b + float(p[1])
-        a = a / len(arr)
-        b = b / len(arr)
-        mark['MultiGeometry'] = {
-            'Polygon': mark['Polygon'],
-            'Point': {
-                'extrude': '1',
-                'altitudeMode': 'absolute',
-                'coordinates': f'{a},{b},{(lerp(min_height, max_height, error/max_value))-200}'
-            }
-        }
-        del mark['Polygon']
+        # mark['Polygon']['extrude'] = '0'
+        # mark['Polygon']['altitudeMode'] = 'absolute'
+        # # Update coordindates
+        # ring = mark['Polygon']['outerBoundaryIs']['LinearRing']
+        # ring['coordinates'] = ' '.join([f'{c},{lerp(min_height, max_height, error/max_value)}' for c in re.split(r'\\n|\s', ring['coordinates'])])
+        # # Add a point
+        # # https://stackoverflow.com/questions/43112699/line-label-not-displayed-when-using-region-on-kml-file-for-ge#:~:text=This%20is%20a%20bug%20in,the%20location%20of%20the%20point.
+        # a = 0
+        # b = 0
+        # arr = ring['coordinates'].split(' ')
+        # for pair in arr:
+        #     p = pair.split(',')
+        #     a = a + float(p[0])
+        #     b = b + float(p[1])
+        # a = a / len(arr)
+        # b = b / len(arr)
+        # mark['MultiGeometry'] = {
+        #     'Polygon': mark['Polygon'],
+        #     'Point': {
+        #         'extrude': '1',
+        #         'altitudeMode': 'absolute',
+        #         'coordinates': f'{a},{b},{(lerp(min_height, max_height, error/max_value))-200}'
+        #     }
+        # }
+        # del mark['Polygon']
 
 
 def precincts_to_kml(precincts_file, output_file, z_axis, apply_race_colors, census_year):
