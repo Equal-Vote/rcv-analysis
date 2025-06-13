@@ -124,15 +124,15 @@ def apply_data_to_kml(precincts, key, max_value, apply_race_colors, kml):
             # race = 'Black or African American'
             # race = 'Hispanic'
             # race = 'Asian'
-            race = 'White'
+            race = 'White' # we're inverting this below so it's actually People of Color
 
             t = float(precincts[pre(mark)][0][race]) / float(precincts[pre(mark)][0]['Precinct Pop.'])
 
             mark['name'] = f'{round((1-t)*100)}%'
 
             # t = (t - .3) / (.5 - .3)# inv lerp 30% - 50%
-            t = (t - .0) / (.3 - .0)# inv lerp 00% - 30%
-            # t = (t - .2) / (.9 - .2)# inv lerp 20% - 90%
+            # t = (t - .0) / (.3 - .0)# inv lerp 00% - 30%
+            t = (t - .2) / (.9 - .2)# inv lerp 20% - 90%
             # t = (t - .2) / (1 - .2)# inv lerp 20% - 100%
             #t = (t - .0) / (.01 - .0)# inv lerp 00% - 1%
 

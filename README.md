@@ -49,6 +49,16 @@ It assumed the following settings. Individual elections require different settin
 
 This dataset also specifes a number of overrides for fields that aren't computed by rcv_cruncher. The overrides also include the Aspen election. This election was said to use STV, but the specific algorithm they used was closer to block-IRV, so I felt it was fair to include it here.
 
+## 2025-06-12
+
+Added outputs for 2022 Oakland Mayor Election, and District School Board
+
+These CSVs show precinct level stats, along with the precinct level census data
+
+```
+python cruncher.py precinct-stats -o output.csv
+```
+
 # Future work
 
 The FairVote RCV Cruncher tool was very helpful and gave us 99% of the data we needed.
