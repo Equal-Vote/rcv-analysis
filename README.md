@@ -59,6 +59,12 @@ These CSVs show precinct level stats, along with the precinct level census data
 python cruncher.py precinct-stats -o output.csv
 ```
 
+Afterward kmls were generated in order to visualize the precincts on google maps
+
+```
+python cruncher.py precincts-to-kml -r -o output2.kml -p outputs/2025-04-18-oakland-mayor-2022-precincts.csv
+```
+
 # Future work
 
 The FairVote RCV Cruncher tool was very helpful and gave us 99% of the data we needed.
