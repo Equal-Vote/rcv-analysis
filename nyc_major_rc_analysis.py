@@ -12,9 +12,11 @@ def convert_to_one_big_csv(folder_location):
     files_list = [f for f in os.listdir() if f.lower().endswith('.xlsx')]
 
     # This file name will need to be updated for 2025
-    candidate_ids = pd.read_excel('2021P_CandidacyID_To_Name.xlsx')
-    if '2021P_CandidacyID_To_Name.xlsx' in files_list:
-        files_list.remove('2021P_CandidacyID_To_Name.xlsx')
+    candidates_file_name = 'Primary Election 2025 - 06-24-2025_CandidacyID_To_Name.xlsx'
+    # candidates_file_name = '2021P_CandidacyID_To_Name.xlsx'
+    candidate_ids = pd.read_excel(candidates_file_name)
+    if candidates_file_name in files_list:
+        files_list.remove(candidates_file_name)
 
     candidate_ids.to_csv('output/2021P_CandidacyID_To_Name.csv')
     print("Candidate IDs as 'output/2021P_CandidacyID_To_Name.csv'")
@@ -22,11 +24,16 @@ def convert_to_one_big_csv(folder_location):
     required_columns = [
         'Cast Vote Record',
         'Precinct',
-        'DEM Mayor Choice 1 of 5 Citywide (024306)',
-        'DEM Mayor Choice 2 of 5 Citywide (224306)',
-        'DEM Mayor Choice 3 of 5 Citywide (324306)',
-        'DEM Mayor Choice 4 of 5 Citywide (424306)',
-        'DEM Mayor Choice 5 of 5 Citywide (524306)'
+        # 'DEM Mayor Choice 1 of 5 Citywide (024306)',
+        # 'DEM Mayor Choice 2 of 5 Citywide (224306)',
+        # 'DEM Mayor Choice 3 of 5 Citywide (324306)',
+        # 'DEM Mayor Choice 4 of 5 Citywide (424306)',
+        # 'DEM Mayor Choice 5 of 5 Citywide (524306)'
+        'DEM Mayor Choice 1 of 5 Citywide (026916)',
+        'DEM Mayor Choice 2 of 5 Citywide (226916)',
+        'DEM Mayor Choice 3 of 5 Citywide (326916)',
+        'DEM Mayor Choice 4 of 5 Citywide (426916)',
+        'DEM Mayor Choice 5 of 5 Citywide (526916)'
     ]
 
     combined = []
@@ -44,11 +51,17 @@ def convert_to_one_big_csv(folder_location):
 
     # Double check that the column names are the same for the 2025 election
     result.rename(columns={
-        'DEM Mayor Choice 1 of 5 Citywide (024306)':'Choice 1',
-        'DEM Mayor Choice 2 of 5 Citywide (224306)':'Choice 2',
-        'DEM Mayor Choice 3 of 5 Citywide (324306)':'Choice 3',
-        'DEM Mayor Choice 4 of 5 Citywide (424306)':'Choice 4',
-        'DEM Mayor Choice 5 of 5 Citywide (524306)':'Choice 5'
+        # 'DEM Mayor Choice 1 of 5 Citywide (024306)':'Choice 1',
+        # 'DEM Mayor Choice 2 of 5 Citywide (224306)':'Choice 2',
+        # 'DEM Mayor Choice 3 of 5 Citywide (324306)':'Choice 3',
+        # 'DEM Mayor Choice 4 of 5 Citywide (424306)':'Choice 4',
+        # 'DEM Mayor Choice 5 of 5 Citywide (524306)':'Choice 5'
+
+        'DEM Mayor Choice 1 of 5 Citywide (026916)':'Choice 1',
+        'DEM Mayor Choice 2 of 5 Citywide (226916)':'Choice 2',
+        'DEM Mayor Choice 3 of 5 Citywide (326916)':'Choice 3',
+        'DEM Mayor Choice 4 of 5 Citywide (426916)':'Choice 4',
+        'DEM Mayor Choice 5 of 5 Citywide (526916)':'Choice 5'
     },inplace=True)
 
     result.to_csv('output/NYC_Mayor_RC_Data.csv', index=False)
@@ -141,14 +154,14 @@ def nyc_mayoral_analysis(candidate1,candidate2,candidate3,folder_location):
 def main():
     print("Starting STAR voting analysis...")
     # Adjust this to your file location with the excel files
-    folder_location = r'C:\Users\mpcas\Documents\STAR Voting\PE2021_CVR_Final\CSV_Versions'
-    convert_to_one_big_csv(folder_location)
+    folder_location = r'C:\w\rcv-analysis\2025_Primary_CVR_2025-07-17'
+    # convert_to_one_big_csv(folder_location)
 
     # Run this for the 2025 election
-    # nyc_mayoral_analysis('Zohran Mamdani','Andrew Cuomo','Brad Lander',folder_location)
+    nyc_mayoral_analysis('Zohran Mamdani','Andrew Cuomo','Brad Lander',folder_location)
 
     # Currently setup for the 2021 election
-    nyc_mayoral_analysis('Eric Adams','Maya Wiley','Kathryn Garcia',folder_location)
+    # nyc_mayoral_analysis('Eric Adams','Maya Wiley','Kathryn Garcia',folder_location)
 
 
 
