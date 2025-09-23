@@ -14,6 +14,7 @@ data = defaultdict( lambda: {
     'election': '',
     'competitive_ratio': -1,
     'total_rankings_used': 0,
+    'min_elimination_margin': 0,
     # These are empty unless there's an override
     'upward_monotonicity_failure': '',
     'downward_monotonicity_failure': '',
@@ -34,7 +35,6 @@ data = defaultdict( lambda: {
     'total_ballots_with_rankings_stalled_after_runner_up': 0,
     'total_ballots_with_fav_eliminated_and_second_not_tallied': 0,
     'total_ballots_with_elimination_and_next_not_tallied': 0,
-    'min_elimination_margin': 0,
     # These are set based on rcv cruncher
     'n_candidates': '',
     'rank_limit': '',
@@ -125,7 +125,7 @@ def parse_election_stats(file_names, verbose):
                             continue
                         if int(tally) < lowest_remaining_tally:
                             lowest_remaining_tally = int(tally)
-                    mm = lowest_remaining_tally
+                    mm = min(mm, lowest_remaining_tally-elim_sum)
 
             if len(rounds['results']) < 2:
                 competitive_ratio = 0
@@ -193,7 +193,7 @@ def parse_election_stats(file_names, verbose):
 
             def parse_ballot(b):
                 e_stack = copy(elim_order)
-                b_stack = [c for c in list(reversed(b.to_list()[1:])) if c != 'skipped']
+                b_stack = [c for c in list(reversed(b.to_list()[b.index.get_loc('rank1'):])) if c != 'skipped']
                 rankings_used = len(b_stack)
 
                 rankings_skipped_by_tally = 0
@@ -254,6 +254,8 @@ def parse_election_stats(file_names, verbose):
                 'total_ballots_with_fav_eliminated_and_second_not_tallied': sum_o['has_fav_eliminated_and_second_not_tallied'],
                 'total_ballots_with_elimination_and_next_not_tallied': sum_o['has_elimination_and_next_not_tallied'],
             })
+
+            # print(sum_o['rankings_tallied'], '/', sum_o['rankings_used'], ' = ', sum_o['rankings_tallied']/sum_o['rankings_used'])
 
             log(f'{round(time.time()-start)}s')
 
