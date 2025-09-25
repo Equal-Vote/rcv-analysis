@@ -193,8 +193,18 @@ def parse_election_stats(file_names, verbose):
 
             def parse_ballot(b):
                 e_stack = copy(elim_order)
-                b_stack = [c for c in list(reversed(b.to_list()[b.index.get_loc('rank1'):])) if c != 'skipped']
-                rankings_used = len(b_stack)
+                l = b.to_list()[b.index.get_loc('rank1'):]
+                rankings_used = len([x for x in l if x != 'skipped'])
+                for i in range(len(l)):
+                    # anything after overvote should be skipped
+                    if l[i] == 'overvote':
+                        for j in range(i, len(l)):
+                            l[j] = 'skipped'
+                    # duplicate rankings should be skipped
+                    if i != l.index(l[i]):
+                        l[i] = 'skipped'
+
+                b_stack = [c for c in list(reversed(l)) if c != 'skipped']
 
                 rankings_skipped_by_tally = 0
                 rankings_tallied = 1 if len(b_stack) > 0 else 0 
@@ -243,6 +253,8 @@ def parse_election_stats(file_names, verbose):
 
             sum_o = df.apply(parse_ballot, axis='columns', result_type='expand').sum(axis='index') # run operation on all rows and then sum each column
             data[election_name].update({
+                # This overrides the previous total_rankings_used which is mean_rankings_used * total_ballots. 
+                # We use sum_o since that one includes overvotes
                 'total_rankings_used': sum_o['rankings_used'],
                 'total_rankings_skipped_by_tally': sum_o['rankings_skipped_by_tally'],
                 'total_rankings_stalled_after_winner': sum_o['rankings_stalled_after_winner'],
@@ -255,7 +267,7 @@ def parse_election_stats(file_names, verbose):
                 'total_ballots_with_elimination_and_next_not_tallied': sum_o['has_elimination_and_next_not_tallied'],
             })
 
-            # print(sum_o['rankings_tallied'], '/', sum_o['rankings_used'], ' = ', sum_o['rankings_tallied']/sum_o['rankings_used'])
+            print(sum_o['rankings_tallied'], '/', sum_o['rankings_used'], ' = ', sum_o['rankings_tallied']/sum_o['rankings_used'])
 
             log(f'{round(time.time()-start)}s')
 

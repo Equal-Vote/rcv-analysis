@@ -6,13 +6,13 @@ You can find descriptions of most of the stats [here](https://rcv-cruncher.readt
 Here's additional fields that this computes:
 Here's some fields that were derived from the rcv-cruncher output:
  * **competitive_ratio**: This is defined as the ratio in first place votes between the 3rd place candidate and the 1st place candidate. It's useful for comparing to results from [this paper](https://www.researchgate.net/publication/258164743_Frequency_of_monotonicity_failure_under_Instant_Runoff_Voting_Estimates_based_on_a_spatial_model_of_elections)
- * **total_rankings_used**: Total rankings used by the voters. Computed as ``mean_rankings_used * total_ballots`` using outputs from rcv-cruncher.
  * **min_elimination_margin**: Smallest margin between the eliminated candidate and the next lowest candidate across all the elimination rounds. This helps guage how close the election is for auditing purposes. So if min_elimination margin is 10, then the elimination order (and potentially the winner) could change if just 5 votes flipped. 
 
  And some more fields that didn't rely on rcv-cruncher:
  * **total_rankings_skipped_by_tally**: Total rankings that were skipped during tally due to candidates already being eliminated. 
  * **total_rankings_stalled_after_winner**: Total rankings that were left over at the end of the tally where the ballot was allocated to the winner. These untallied rankings are respecting the voters intent per later-no-harm. 
  * **total_rankings_stalled_after_runner_up**: Total rankings that were left over at the end of the tally where the ballot was not allocated to the winner. These untallied rankings are NOT respecting the voters intent.
+ * **total_rankings_used**: Total rankings used by the voters. NOTE: Previously this was a derived field from ``mean_rankings_used * total_ballots`` using outputs from rcv-cruncher, but this was updated since mean_rankings_used tends to be lower due to duplicate ranks counting as 1 ranking.
  * **total_rankings_tallied**: Total rankings tallied during the elimination rounds.
  * **total_ballots_with_rankings_skipped_by_tally**: Total ballots which had at least one of the rankings skipped during the tally.
  * **total_ballots_with_rankings_stalled_after_winner**: Total ballots which had at least one of the rankings skipped during the tally.
