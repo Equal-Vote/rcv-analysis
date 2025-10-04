@@ -95,6 +95,12 @@ python cruncher.py election-stats -o output.csv
 
 The output is available at outputs/2025-09-20-all-elections.csv
 
+## 2025-10-03
+
+Added another output that divides how many of each ranking is tallied
+
+The output is available at outputs/2025-10-03-all-elections.csv
+
 # Future work
 
 The FairVote RCV Cruncher tool was very helpful and gave us 99% of the data we needed.

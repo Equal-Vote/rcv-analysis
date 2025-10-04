@@ -13,7 +13,6 @@ data = defaultdict( lambda: {
     # These are derived from top stats
     'election': '',
     'competitive_ratio': -1,
-    'total_rankings_used': 0,
     'min_elimination_margin': 0,
     # These are empty unless there's an override
     'upward_monotonicity_failure': '',
@@ -26,6 +25,7 @@ data = defaultdict( lambda: {
     'note4': '',
     'note5': '',
     # These are derived from iterating over ballot
+    'total_rankings_used': 0,
     'total_rankings_skipped_by_tally': 0,
     'total_rankings_stalled_after_winner': 0,
     'total_rankings_stalled_after_runner_up': 0,
@@ -35,6 +35,21 @@ data = defaultdict( lambda: {
     'total_ballots_with_rankings_stalled_after_runner_up': 0,
     'total_ballots_with_fav_eliminated_and_second_not_tallied': 0,
     'total_ballots_with_elimination_and_next_not_tallied': 0,
+
+    'total_rankings_tallied_1': 0,
+    'total_rankings_tallied_2': 0,
+    'total_rankings_tallied_3': 0,
+    'total_rankings_tallied_4': 0,
+    'total_rankings_tallied_5': 0,
+    'total_rankings_tallied_6': 0,
+
+    'total_rankings_used_1': 0,
+    'total_rankings_used_2': 0,
+    'total_rankings_used_3': 0,
+    'total_rankings_used_4': 0,
+    'total_rankings_used_5': 0,
+    'total_rankings_used_6': 0,
+
     # These are set based on rcv cruncher
     'n_candidates': '',
     'rank_limit': '',
@@ -191,6 +206,9 @@ def parse_election_stats(file_names, verbose):
                 for op in results['tallyResults']:
                     elim_order.append(op['eliminated'] if 'eliminated' in op else op['elected'])
 
+            num_finalists = len(rounds['results'][-1]['tallyResults'])
+
+
             def parse_ballot(b):
                 e_stack = copy(elim_order)
                 l = b.to_list()[b.index.get_loc('rank1'):]
@@ -208,10 +226,15 @@ def parse_election_stats(file_names, verbose):
 
                 rankings_skipped_by_tally = 0
                 rankings_tallied = 1 if len(b_stack) > 0 else 0 
+                rankings_tallied_list = [0]*12 # using a large number to avoid index issues, but we don't actually use all of them
+
+                if(len(b_stack) > 0):
+                    rankings_tallied_list[int(b[b == b_stack[-1]].index.tolist()[0].replace('rank',''))] = 1
+
                 first_ballot_elimination_completed = False
                 fav_eliminated_and_second_not_tallied = False
-                # repeat tally until only final 2 are left, or the ballot is exhasuted
-                while len(e_stack) > 2 and len(b_stack) > 0:
+                # repeat tally until all eliminated candidates have been processed, or the ballot is exhasuted
+                while len(e_stack) > num_finalists and len(b_stack) > 0:
                     e_stack.pop()
                     # if top candidate is still in the running, continue
                     if b_stack[-1] in e_stack:
@@ -227,11 +250,12 @@ def parse_election_stats(file_names, verbose):
                         rankings_skipped_by_tally = rankings_skipped_by_tally + 1
                     if len(b_stack) > 0 and b_stack[-1] in e_stack:
                         rankings_tallied = rankings_tallied + 1
+                        rankings_tallied_list[int(b[b == b_stack[-1]].index.tolist()[0].replace('rank',''))] = 1
 
                     first_ballot_elimination_completed = True
                 
-                stall_after_winner = len(b_stack)-1 if len(b_stack) > 0 and b_stack[-1] == e_stack[0] else 0
-                stall_after_runner_up =len(b_stack)-1 if len(b_stack) > 0 and b_stack[-1] == e_stack[-1] else 0
+                stall_after_winner = len(b_stack)-1 if len(b_stack) > 0 and b_stack[-1] == stats['winner'] else 0
+                stall_after_runner_up =len(b_stack)-1 if len(b_stack) > 0 and b_stack[-1] != stats['winner'] else 0
 
                 if not first_ballot_elimination_completed and stall_after_runner_up > 0 and len(b_stack) == rankings_used:
                     fav_eliminated_and_second_not_tallied = True
@@ -239,9 +263,23 @@ def parse_election_stats(file_names, verbose):
                 return {
                     'rankings_used': rankings_used,
                     'rankings_skipped_by_tally': rankings_skipped_by_tally,
-                    'rankings_tallied': rankings_tallied,
                     'rankings_stalled_after_winner': stall_after_winner,
                     'rankings_stalled_after_runner_up': stall_after_runner_up,
+                    'rankings_tallied': rankings_tallied,
+
+                    'rankings_used_1': b['rank1'] != 'skipped' if 'rank1' in b else 0,
+                    'rankings_used_2': b['rank2'] != 'skipped' if 'rank2' in b else 0,
+                    'rankings_used_3': b['rank3'] != 'skipped' if 'rank3' in b else 0,
+                    'rankings_used_4': b['rank4'] != 'skipped' if 'rank4' in b else 0,
+                    'rankings_used_5': b['rank5'] != 'skipped' if 'rank5' in b else 0,
+                    'rankings_used_6': b['rank6'] != 'skipped' if 'rank6' in b else 0,
+
+                    'rankings_tallied_1': rankings_tallied_list[1],
+                    'rankings_tallied_2': rankings_tallied_list[2],
+                    'rankings_tallied_3': rankings_tallied_list[3],
+                    'rankings_tallied_4': rankings_tallied_list[4],
+                    'rankings_tallied_5': rankings_tallied_list[5],
+                    'rankings_tallied_6': rankings_tallied_list[6],
 
                     'has_rankings_skipped_by_tally': rankings_skipped_by_tally > 0,
                     'has_rankings_stalled_after_winner': stall_after_winner > 0,
@@ -260,6 +298,21 @@ def parse_election_stats(file_names, verbose):
                 'total_rankings_stalled_after_winner': sum_o['rankings_stalled_after_winner'],
                 'total_rankings_stalled_after_runner_up': sum_o['rankings_stalled_after_runner_up'],
                 'total_rankings_tallied': sum_o['rankings_tallied'],
+
+                'total_rankings_used_1': sum_o['rankings_used_1'],
+                'total_rankings_used_2': sum_o['rankings_used_2'],
+                'total_rankings_used_3': sum_o['rankings_used_3'],
+                'total_rankings_used_4': sum_o['rankings_used_4'],
+                'total_rankings_used_5': sum_o['rankings_used_5'],
+                'total_rankings_used_6': sum_o['rankings_used_6'],
+
+                'total_rankings_tallied_1': sum_o['rankings_tallied_1'],
+                'total_rankings_tallied_2': sum_o['rankings_tallied_2'],
+                'total_rankings_tallied_3': sum_o['rankings_tallied_3'],
+                'total_rankings_tallied_4': sum_o['rankings_tallied_4'],
+                'total_rankings_tallied_5': sum_o['rankings_tallied_5'],
+                'total_rankings_tallied_6': sum_o['rankings_tallied_6'],
+
                 'total_ballots_with_rankings_skipped_by_tally': sum_o['has_rankings_skipped_by_tally'],
                 'total_ballots_with_rankings_stalled_after_winner': sum_o['has_rankings_stalled_after_winner'],
                 'total_ballots_with_rankings_stalled_after_runner_up': sum_o['has_rankings_stalled_after_runner_up'],
@@ -267,7 +320,10 @@ def parse_election_stats(file_names, verbose):
                 'total_ballots_with_elimination_and_next_not_tallied': sum_o['has_elimination_and_next_not_tallied'],
             })
 
-            print(sum_o['rankings_tallied'], '/', sum_o['rankings_used'], ' = ', sum_o['rankings_tallied']/sum_o['rankings_used'])
+            # print(sum_o['rankings_tallied'], '/', sum_o['rankings_used'], ' = ', sum_o['rankings_tallied']/sum_o['rankings_used'])
+            # for j in range(1,7):
+            #     i = str(j)
+            #     print(i, ': ', sum_o['rankings_tallied_'+i], '/', sum_o['rankings_used_'+i], ' = ', sum_o['rankings_tallied_'+i]/sum_o['rankings_used_'+i])
 
             log(f'{round(time.time()-start)}s')
 
